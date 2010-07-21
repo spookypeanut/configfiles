@@ -94,10 +94,6 @@ nmap ,.c :sp $HOME/.cshrc<CR>
 "nmap ,fpm :s/, *[a-z]*/ + ", " + /eg<CR>:s/([a-z]*/(" +/<CR>:s/)[^()]*$/ + ")");/<CR>:s/^\([[:space:]]*\)/\1print("/<CR>:s/" +  + "//g<CR>
 nmap ,fpm :s/, *[a-z]*/ + ", " + /eg<CR>:s/([a-z]*/(" +/<CR>:s/)[^()]*$/ + ")\\n");/<CR>:s/^\([[:space:]]*\)/\1print("/<CR>:s/" +  + "//g<CR>:s/+ \[\] \(\$[a-zA-Z0-9_]*\)/+ stringArrayToString(\1, ",")/g<CR>
 
-
-nmap ,gs :split /job/$PL_SHOW/dev/sandbox/sandbox_$USER/%<CR>
-
-
 "Seemed like a good idea at the time, but really it just annoys me
 "noremap <Space> <PageDown>
 "noremap <BS> <PageUp>
@@ -106,7 +102,6 @@ map ,cd :exe 'cd ' . expand ("%:p:h")<CR>
 map Y y$
 
 source ~/private/twit.credentials
-let twitvim_proxy = "proxy.framestore.com:8001"
 
 let Tlist_Exit_OnlyWindow = 1
 
