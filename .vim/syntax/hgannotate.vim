@@ -1,0 +1,1 @@
+../vcscommand/syntax/hgannotate.vim
