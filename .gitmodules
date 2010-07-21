@@ -1,0 +1,3 @@
+[submodule ".vim/vcscommand"]
+	path = .vim/vcscommand
+	url = http://repo.or.cz/r/vcscommand.git
