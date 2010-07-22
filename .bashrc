@@ -4,6 +4,7 @@ PS1='\w$ '
 LD_LIBRARY_PATH=/usr/local/lib
 EDITOR="/usr/bin/gvim --nofork"
 PYTHONPATH="/home/hbush/lib/python/:$PYTHONPATH"
+PAGER="vimman"
 
 export PS1 PKG_CONFIG_PATH LD_LIBRARY_PATH EDITOR PYTHONPATH
 
