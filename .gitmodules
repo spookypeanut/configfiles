@@ -7,3 +7,6 @@
 [submodule ".vim/twitvim"]
 	path = .vim/twitvim
 	url = http://github.com/developwithpassion/twitvim.git
+[submodule ".vim/taglist"]
+	path = .vim/taglist
+	url = http://github.com/learnjin/taglist.vim.git
