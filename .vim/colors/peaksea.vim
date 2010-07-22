@@ -259,7 +259,7 @@ elseif &background=='dark'
   " for background=dark {{{2
   " DARK COLOR DEFINE START
 
-  hi Normal		guifg=#d0d0d0	guibg=#202020	gui=NONE
+  hi Normal		guifg=#d0d0d0	guibg=#000000	gui=NONE
   hi Comment		guifg=#d0d090	guibg=NONE	gui=NONE
   hi Constant		guifg=#80c0e0	guibg=NONE	gui=NONE
   hi Number		guifg=#e0c060	guibg=NONE	gui=NONE
@@ -491,7 +491,7 @@ elseif &background=='dark'
     endif
   elseif &t_Co==256
     " 256color dark terminal support here
-    hi Normal		ctermfg=252	ctermbg=234	cterm=NONE
+    hi Normal		ctermfg=252	ctermbg=16	cterm=NONE
     " Comment/Uncomment the following line to disable/enable transparency
     "hi Normal		ctermfg=252	ctermbg=NONE	cterm=NONE
     hi Comment		ctermfg=186	ctermbg=NONE	cterm=NONE
