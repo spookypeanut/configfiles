@@ -101,7 +101,8 @@ nmap ,fpm :s/, *[a-z]*/ + ", " + /eg<CR>:s/([a-z]*/(" +/<CR>:s/)[^()]*$/ + ")\\n
 map ,cd :exe 'cd ' . expand ("%:p:h")<CR>
 map Y y$
 
-source ~/private/twit.credentials
+"source ~/private/twit.credentials*/
+let twitvim_enable_python = 1
 
 let Tlist_Exit_OnlyWindow = 1
 
