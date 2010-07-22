@@ -1,3 +1,6 @@
 [submodule ".vim/vcscommand"]
 	path = .vim/vcscommand
 	url = http://repo.or.cz/r/vcscommand.git
+[submodule ".vim/nerdcommenter"]
+	path = .vim/nerdcommenter
+	url = http://github.com/scrooloose/nerdcommenter.git
