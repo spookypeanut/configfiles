@@ -1,1 +1,1 @@
-/net/homes/hbush/configfiles/.vim/twitvim/doc/twitvim.txt
+../twitvim/doc/twitvim.txt

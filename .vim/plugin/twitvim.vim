@@ -1,1 +1,1 @@
-/net/homes/hbush/configfiles/.vim/twitvim/plugin/twitvim.vim
+../twitvim/plugin/twitvim.vim
