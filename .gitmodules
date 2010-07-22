@@ -4,3 +4,6 @@
 [submodule ".vim/nerdcommenter"]
 	path = .vim/nerdcommenter
 	url = http://github.com/scrooloose/nerdcommenter.git
+[submodule ".vim/twitvim"]
+	path = .vim/twitvim
+	url = http://github.com/developwithpassion/twitvim.git
