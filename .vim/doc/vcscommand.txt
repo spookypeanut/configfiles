@@ -1,0 +1,1 @@
+/net/homes/hbush/.vim/vcscommand/doc/vcscommand.txt
