@@ -1,20 +1,21 @@
 " Settings
+" Indent and folding stuff
 set tabstop=4
 set shiftwidth=4
 set autoindent
-set showcmd
 set smartindent
-set incsearch
-set report=0
-set updatetime=500
 set foldmethod=indent
 set nofoldenable
-set splitbelow
-set background=dark
 
-set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc
-set wildmode=longest:full
-set wildmenu
+set showcmd  "Show the current partial command on the right of the command line
+set incsearch "Turn on incremental search (ie search as you type)
+set report=0 "Always tell me how many lines have changed when search / replacing
+set splitbelow "Make new split below the current one
+set background=dark "Want dark background please
+
+set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc "When autocompleting filenames, don't match these
+set wildmode=longest:full "Please complete like <tab> in
+set wildmenu              "a shell does, kthxbai
 
 set ignorecase
 set smartcase
