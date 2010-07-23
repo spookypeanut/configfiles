@@ -227,7 +227,7 @@ if &background=='light'
       hi TabLineSel	ctermfg=fg	ctermbg=NONE	cterm=NONE
       hi CursorColumn	ctermfg=NONE	ctermbg=216
       hi CursorLine	ctermfg=NONE	ctermbg=NONE	cterm=underline
-      hi MatchParen	ctermfg=NONE	ctermbg=150
+      hi MatchParen	ctermfg=NONE	ctermbg=165
     endif
 
     hi TabLine		cterm=underline
@@ -561,7 +561,7 @@ elseif &background=='dark'
       hi TabLineSel	ctermfg=fg	ctermbg=NONE	cterm=NONE
       hi CursorColumn	ctermfg=NONE	ctermbg=88	cterm=NONE
       hi CursorLine	ctermfg=NONE	ctermbg=NONE	cterm=underline
-      hi MatchParen	ctermfg=NONE	ctermbg=90
+      hi MatchParen	ctermfg=NONE	ctermbg=133
       hi TabLine	cterm=underline  
       hi TabLineFill	cterm=underline  
       hi Underlined	cterm=underline  
