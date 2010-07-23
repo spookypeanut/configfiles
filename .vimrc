@@ -48,6 +48,7 @@ set guioptions-=m
 autocmd FileType * set noexpandtab
 autocmd FileType python set expandtab
 
+" Auto-close brackets
 inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {{     {
@@ -66,10 +67,7 @@ inoremap [[     [
 inoremap []     []
 inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 
-
-" Use the same symbols as TextMate for tabstops and EOLs
-"set listchars=tab:▸\ ,eol:¬
-
+" Map function keys
 map <F2> ,ci
 map <F3> :registers<CR>
 map <F4> :TlistToggle<CR>
@@ -79,9 +77,13 @@ map <F6> :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable
 map <F7> zi
 map <F8> :s/^[[:space:]]*//g
 
+" Explore the filesystem
 map <F9> :Sexplore<CR>
+" Toggle paste
 map <F10> :set paste!<Bar>set paste?<CR>
+" Toggle line numbers
 map <F11> :se nu!<CR>
+" Maximize current split
 map <F12> <C-w><C-_>
 
 map <C-j> <C-w>j
@@ -96,9 +98,18 @@ map <C--> <C-W>-
 
 map zw zCzO
 map gf :sp <cfile><CR>
+map ,cd :exe 'cd ' . expand ("%:p:h")<CR>
+map Y y$
 
+nmap ,.s :source $MYVIMRC<CR>
+nmap ,.v :sp $MYVIMRC<CR>
+nmap ,.c :sp $HOME/.cshrc<CR>
+nmap ,fpm :s/, *[a-z]*/ + ", " + /eg<CR>:s/([a-z]*/(" +/<CR>:s/)[^()]*$/ + ")\\n");/<CR>:s/^\([[:space:]]*\)/\1print("/<CR>:s/" +  + "//g<CR>:s/+ \[\] \(\$[a-zA-Z0-9_]*\)/+ stringArrayToString(\1, ",")/g<CR>
+
+" Toggle word
 nmap ,t :ToggleWord<CR>
 
+" VCS Command
 nmap ,va :VCSAdd<CR>
 nmap ,vd :VCSDiff<CR>
 nmap ,vc :VCSUpdate<CR>:VCSCommit<CR>
@@ -106,14 +117,10 @@ nmap ,vu :VCSUpdate<CR>
 nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
 
-nmap ,.s :source $MYVIMRC<CR>
-nmap ,.v :sp $MYVIMRC<CR>
-nmap ,.c :sp $HOME/.cshrc<CR>
-nmap ,fpm :s/, *[a-z]*/ + ", " + /eg<CR>:s/([a-z]*/(" +/<CR>:s/)[^()]*$/ + ")\\n");/<CR>:s/^\([[:space:]]*\)/\1print("/<CR>:s/" +  + "//g<CR>:s/+ \[\] \(\$[a-zA-Z0-9_]*\)/+ stringArrayToString(\1, ",")/g<CR>
-
-map ,cd :exe 'cd ' . expand ("%:p:h")<CR>
-map Y y$
-
+" TwitVim
+source ~/private/privatetwit.vim
 let twitvim_enable_python = 1
 
+" Tag list
 let Tlist_Exit_OnlyWindow = 1
+
