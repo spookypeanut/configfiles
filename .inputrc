@@ -1,9 +1,9 @@
 set editing-mode vi
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set mark-symlinked-directories on
 "[A": history-search-backward
 "[B": history-search-forward
-#"\C-f": history-search-backward
-#"\C-g": history-search-forward
 "\C-k": "\C-[Iecho \C-m"
 "\C-l": "\C-[\C-P^5x\C-j"
 "\C-x\"": "\"\"\C-b"
-set mark-symlinked-directories on
