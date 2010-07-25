@@ -3,10 +3,11 @@ PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
 PS1='\w$ '
 LD_LIBRARY_PATH=/usr/local/lib
 EDITOR="/usr/bin/gvim --nofork"
-PYTHONPATH="/home/hbush/lib/python/:$PYTHONPATH"
+PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
 PAGER="vimman"
-
-export PS1 PKG_CONFIG_PATH LD_LIBRARY_PATH EDITOR PYTHONPATH
+MANPAGER="vimman"
+PATH="$PATH:$HOME/android-sdk-linux_86/tools/"
+export PS1 PKG_CONFIG_PATH LD_LIBRARY_PATH EDITOR PYTHONPATH PATH
 
 # ALIASES
 alias ls='ls --color=auto'
@@ -14,6 +15,7 @@ alias ll='ls -l'
 alias lrt='ls -lrt'
 alias lsd='ls -ld */'
 alias l='ls -CF'
+alias lcc='ls -l| grep -v "\.o$" | grep -v "\.a$"'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -48,9 +50,10 @@ alias .7='cd ../../../../../../..'
 alias .8='cd ../../../../../../../..'
 alias .9='cd ../../../../../../../../..'
 
-# Wine
-alias paf='wine /home/hbush/.wine/drive_c/Program\ Files/FamilySearch/Paf5/paf5.exe'
-alias autostitch='wine /home/hbush/autostitch/autostitch.exe'
+# Wine / VM
+alias paf="wine $HOME/.wine/drive_c/Program\ Files/FamilySearch/Paf5/paf5.exe"
+alias autostitch="wine $HOME/autostitch/autostitch.exe"
+alias ida='VirtualBox --startvm ida'
 
 #Misspellings
 alias cd..='cd ..'
