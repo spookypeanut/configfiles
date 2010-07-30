@@ -69,13 +69,23 @@ inoremap []     []
 inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 
 " Map function keys
+
+" Comment out a single line / range
 map <F2> ,ci
+" List what's in the registers
+" TODO: Don't really use this, might swap it out
 map <F3> :registers<CR>
+" Open the "tag list" (function definition list, etc)
 map <F4> :TlistToggle<CR>
 
+" Toggle highlighting of search terms
 map <F5> :set hls!<bar>set hls?<CR>
+" Toggle syntax
 map <F6> :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
+" Toggle folding
 map <F7> zi
+" Replace whitespace at start of line (note: no <CR>, so doesn't actually do it)
+" TODO: Don't really use this, might swap it out
 map <F8> :s/^[[:space:]]*//g
 
 " Explore the filesystem

@@ -1,0 +1,8 @@
+#!/bin/bash
+# Show an additional 5 line each way
+CONTEXT=5
+LINE=$1
+FIRSTLINE=$(($1 - $CONTEXT))
+LASTLINE=$(($1 + $CONTEXT))
+sed = $2 | sed "N;s_\n_\t_" | sed -n "$FIRSTLINE,${LASTLINE}p" | sed "s/^\($LINE\t.*\)/[38;5;111m\1[0m/"
+
