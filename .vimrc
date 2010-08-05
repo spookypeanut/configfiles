@@ -38,6 +38,11 @@ hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
+highlight OverLength ctermbg=53 guibg=#592929
+" 7.2 only
+" au BufWinEnter * let w:m2=matchadd('OverLength', '\%>80v.\+', -1)*/
+au BufRead,BufNewFile * syntax match OverLength /\%>80v.\+/
+
 " Mappings
 au BufRead,BufNewFile *.sdl,*.jdl set filetype=fcdl
 au BufRead,BufNewFile *.ma set filetype=mel
