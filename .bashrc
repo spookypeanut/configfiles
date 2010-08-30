@@ -57,10 +57,13 @@ alias paf="wine $HOME/.wine/drive_c/Program\ Files/FamilySearch/Paf5/paf5.exe"
 alias autostitch="wine $HOME/autostitch/autostitch.exe"
 alias ida='VirtualBox --startvm ida'
 
-#Misspellings
+# Misspellings
 alias cd..='cd ..'
 alias ls#='ls'
 alias grerp='grep'
+
+# Git
+alias gitk='gitk --all &'
 
 function cdd {
 	cd $(echo $* | sed 's_/.*$_/_g') ; 
