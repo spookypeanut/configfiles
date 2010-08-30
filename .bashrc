@@ -37,6 +37,8 @@ alias scummvm='scummvm -d5'
 alias v.b='vim ~/.bashrc'
 alias v.v='vim ~/.vimrc'
 alias kie='pkill -SEGV wineserver'
+alias temp='test -f /sys/devices/virtual/thermal/thermal_zone0/temp && cat /sys/devices/virtual/thermal/thermal_zone0/temp'
+alias adb-link='sudo ~/android-sdk-linux_86/tools/adb kill-server && sudo ~/android-sdk-linux_86/tools/adb start-server'
 
 alias ..='cd ..'
 alias .2='cd ../..'
