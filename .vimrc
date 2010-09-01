@@ -3,7 +3,7 @@
 set tabstop=4
 set shiftwidth=4
 set autoindent
-set smartindent
+" set smartindent
 set foldmethod=indent
 set nofoldenable
 
@@ -77,9 +77,8 @@ inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]
 
 " Comment out a single line / range
 map <F2> ,ci
-" List what's in the registers
-" TODO: Don't really use this, might swap it out
-map <F3> :registers<CR>
+" Search for any line longer than 80 characters
+map <F3> /.\{81,\}<CR>
 " Open the "tag list" (function definition list, etc)
 map <F4> :TlistToggle<CR>
 
