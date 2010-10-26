@@ -41,7 +41,8 @@ nmap <leader>l :set list!<CR>
 highlight OverLength ctermbg=53 guibg=#592929
 " 7.2 only
 " au BufWinEnter * let w:m2=matchadd('OverLength', '\%>80v.\+', -1)*/
-au BufRead,BufNewFile * syntax match OverLength /\%>80v.\+/
+match OverLength /\%79v.\+/
+"au BufRead,BufNewFile * syntax match OverLength /\%>80v.\+/
 
 " Mappings
 au BufRead,BufNewFile *.sdl,*.jdl set filetype=fcdl
@@ -50,9 +51,7 @@ au BufRead,BufNewFile *.ma set filetype=mel
 set guioptions-=T
 set guioptions-=m
 
-"match ErrorMsg '\%>80v.\+'
-autocmd FileType * set noexpandtab
-autocmd FileType python set expandtab
+set expandtab
 
 " Auto-close brackets
 inoremap {      {}<Left>
