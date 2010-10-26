@@ -1,12 +1,13 @@
 [color]
+	interactive = auto
 	diff = auto
 	status = auto
 	branch = auto
+[alias]
+	st = status -s
+	ci = commit
+	graph = log --graph --all --oneline --decorate --pretty=\"format:%C(yellow)%h %Cblue%an %Cgreen%ar%C(yellow bold)%d%Creset%n%s\"
+    vim = difftool --tool=vimdiff
 [user]
 	name = spookypeanut
 	email = github@spookypeanut.co.uk
-
-[diff]
-	external = git_diff_wrapper
-[pager]
-	diff =
