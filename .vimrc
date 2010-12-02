@@ -131,6 +131,10 @@ nmap ,vu :VCSUpdate<CR>
 nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
 
+" Rename all instances of current word in file
+nmap ,rf :%s/\<<c-r>=expand("<cword>")<cr>\>//g
+
+
 " TwitVim
 source ~/private/privatetwit.vim
 let twitvim_enable_python = 1
