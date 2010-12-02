@@ -87,9 +87,9 @@ map <F5> :set hls!<bar>set hls?<CR>
 map <F6> :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
 " Toggle folding
 map <F7> zi
-" Replace whitespace at start of line (note: no <CR>, so doesn't actually do it)
+" Replace whitespace at end of line (note: no <CR>, so doesn't actually do it)
 " TODO: Don't really use this, might swap it out
-map <F8> :s/^[[:space:]]*//g
+map <F8> :%s/[[:space:]]*$//g
 
 " Explore the filesystem
 map <F9> :Sexplore<CR>
