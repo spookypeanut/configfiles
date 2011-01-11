@@ -126,7 +126,7 @@ nmap ,t :ToggleWord<CR>
 " VCS Command
 nmap ,va :VCSAdd<CR>
 nmap ,vd :VCSDiff<CR>
-nmap ,vc :VCSUpdate<CR>:VCSCommit<CR>
+nmap ,vc :VCSCommit<CR>
 nmap ,vu :VCSUpdate<CR>
 nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
