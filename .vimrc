@@ -75,7 +75,7 @@ inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]
 " Map function keys
 
 " Comment out a single line / range
-map <F2> ,ci
+map <F2> \c 
 " Search for any line longer than 80 characters
 map <F3> /.\{81,\}<CR>
 " Open the "tag list" (function definition list, etc)
