@@ -132,7 +132,6 @@ nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
 
 " TwitVim
-source ~/private/privatetwit.vim
 let twitvim_enable_python = 1
 
 " Tag list
