@@ -140,3 +140,4 @@ let twitvim_enable_python = 1
 " Tag list
 let Tlist_Exit_OnlyWindow = 1
 
+filetype plugin indent on
