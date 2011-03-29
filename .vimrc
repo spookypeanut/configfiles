@@ -76,7 +76,7 @@ inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]
 " Map function keys
 
 " Comment out a single line / range
-map <F2> ,ci
+map <F2> \c 
 " Search for any line longer than 80 characters
 map <F3> /.\{81,\}<CR>
 " Open the "tag list" (function definition list, etc) and 
@@ -89,9 +89,8 @@ map <F5> :set hls!<bar>set hls?<CR>
 map <F6> :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
 " Toggle folding
 map <F7> zi
-" Replace whitespace at start of line (note: no <CR>, so doesn't actually do it)
-" TODO: Don't really use this, might swap it out
-map <F8> :s/^[[:space:]]*//g
+" Replace whitespace at end of lines (note: no <CR>, so doesn't actually do it)
+map <F8> :%s/[[:space:]][[:space:]]*$//g
 
 " Explore the filesystem
 map <F9> :Sexplore<CR>
@@ -129,10 +128,14 @@ nmap ,t :ToggleWord<CR>
 " VCS Command
 nmap ,va :VCSAdd<CR>
 nmap ,vd :VCSDiff<CR>
-nmap ,vc :VCSUpdate<CR>:VCSCommit<CR>
+nmap ,vc :VCSCommit<CR>
 nmap ,vu :VCSUpdate<CR>
 nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
+
+" Rename all instances of current word in file
+nmap ,rf :%s/\<<c-r>=expand("<cword>")<cr>\>//g
+
 
 " TwitVim
 let twitvim_enable_python = 1

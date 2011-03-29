@@ -1,13 +1,15 @@
-[color]
-	interactive = auto
-	diff = auto
-	status = auto
-	branch = auto
-[alias]
-	st = status -s
-	ci = commit
-	graph = log --graph --all --oneline --decorate --pretty=\"format:%C(yellow)%h %Cblue%an %Cgreen%ar%C(yellow bold)%d%Creset%n%s\"
-    vim = difftool --tool=vimdiff
 [user]
-	name = "Henry Bush"
-	email = hbush@framestore.com
+    name = "Henry Bush"
+    email = hbush@framestore.com
+
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+
+[alias]
+    ci = commit
+    graph = log --graph --all --oneline --decorate --pretty=\"format:%C(yellow)%h %Cblue%an %Cgreen%ar%C(yellow bold)%d%Creset%n%s\"
+    st = status -s
+    vim = difftool --tool=vimdiff
