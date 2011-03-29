@@ -105,7 +105,7 @@ map <F12> <C-w><C-_>
 
 map <C-j> <C-w>j
 map <C-k> <C-w>k
-map <C-l> <C-w>l
+noremap <C-l> <C-w>l
 map <C-h> <C-w>h
 
 map + 5<C-W>+
