@@ -64,8 +64,11 @@ alias ls#='ls'
 alias grerp='grep'
 
 # Git
-alias gitk='gitk --all &'
 alias gg='git gui &'
+
+function gitk {
+    /usr/bin/gitk --all $* &
+}
 
 function cdd {
 	cd $(echo $* | sed 's_/.*$_/_g') ; 
