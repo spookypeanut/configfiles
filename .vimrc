@@ -96,7 +96,8 @@ map <F9> :Sexplore<CR>
 " Toggle paste
 map <F10> :set paste!<Bar>set paste?<CR>
 " Toggle line numbers
-map <F11> :se nu!<CR>
+"map <F11> :se nu!<CR>
+map <F11> :Ant install<CR>
 " Maximize current split
 map <F12> <C-w><C-_>
 
