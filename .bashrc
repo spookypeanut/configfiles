@@ -6,7 +6,8 @@ EDITOR="/usr/bin/gvim --nofork"
 PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
 PAGER="vimman"
 MANPAGER="vimman"
-PATH="$PATH:$HOME/android-sdk-linux_86/tools/"
+PATH=$PATH:$HOME/android-sdk-linux_86/platform-tools/:$HOME/android-sdk-linux_86/tools/
+ANDROID_LOG_TAGS="*:E WakeMe@:V"
 export PS1 PKG_CONFIG_PATH LD_LIBRARY_PATH EDITOR PYTHONPATH PATH
 
 # ALIASES
@@ -38,7 +39,7 @@ alias v.b='vim ~/.bashrc'
 alias v.v='vim ~/.vimrc'
 alias kie='pkill -SEGV wineserver'
 alias temp='test -f /sys/devices/virtual/thermal/thermal_zone0/temp && cat /sys/devices/virtual/thermal/thermal_zone0/temp'
-alias adb-link='sudo ~/android-sdk-linux_86/tools/adb kill-server && sudo ~/android-sdk-linux_86/tools/adb start-server'
+alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
 
 alias ..='cd ..'
 alias .2='cd ../..'
