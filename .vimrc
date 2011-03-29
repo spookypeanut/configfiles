@@ -50,6 +50,7 @@ au BufRead,BufNewFile *.ma set filetype=mel
 " Get rid of toolbar and menu in gvim
 set guioptions-=T
 set guioptions-=m
+set gfn=Monospace\ 9
 
 set expandtab
 
@@ -78,8 +79,9 @@ inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]
 map <F2> ,ci
 " Search for any line longer than 80 characters
 map <F3> /.\{81,\}<CR>
-" Open the "tag list" (function definition list, etc)
-map <F4> :TlistToggle<CR>
+" Open the "tag list" (function definition list, etc) and 
+" the project tree (eclim)
+map <F4> :ProjectTree<CR>:TlistToggle<CR>
 
 " Toggle highlighting of search terms
 map <F5> :set hls!<bar>set hls?<CR>
