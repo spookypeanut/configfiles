@@ -133,6 +133,8 @@ nmap ,vu :VCSUpdate<CR>
 nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
 
+nmap ,gg :!git gui<CR>
+
 " Rename all instances of current word in file
 nmap ,rf :%s/\<<c-r>=expand("<cword>")<cr>\>//g
 
