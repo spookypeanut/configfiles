@@ -81,7 +81,7 @@ map <F2> \c
 map <F3> /.\{81,\}<CR>
 " Open the "tag list" (function definition list, etc) and 
 " the project tree (eclim)
-map <F4> :ProjectTree<CR>:TlistToggle<CR>
+map <F4> :TlistToggle<CR>:ProjectTree<CR>
 
 " Toggle highlighting of search terms
 map <F5> :set hls!<bar>set hls?<CR>
@@ -132,6 +132,8 @@ nmap ,vc :VCSCommit<CR>
 nmap ,vu :VCSUpdate<CR>
 nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
+
+nmap ,gg :!git gui<CR>
 
 " Rename all instances of current word in file
 nmap ,rf :%s/\<<c-r>=expand("<cword>")<cr>\>//g
