@@ -13,3 +13,6 @@
     graph = log --graph --all --oneline --decorate --pretty=\"format:%C(yellow)%h %Cblue%an %Cgreen%ar%C(yellow bold)%d%Creset%n%s\"
     st = status -s
     vim = difftool --tool=vimdiff
+    co = checkout
+    current-branch = "!git symbolic-ref HEAD 2> /dev/null | sed -e 's#refs/heads/##'"
+    pull2 = "!git fetch origin && git rebase -p origin/$(git current-branch)"
