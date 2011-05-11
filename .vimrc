@@ -41,7 +41,7 @@ nmap <leader>l :set list!<CR>
 highlight OverLength ctermbg=53 guibg=#592929
 " 7.2 only
 " au BufWinEnter * let w:m2=matchadd('OverLength', '\%>80v.\+', -1)*/
-match OverLength /\%79v.\+/
+match OverLength /\%80v.\+/
 "au BufRead,BufNewFile * syntax match OverLength /\%>80v.\+/
 
 " Mappings
