@@ -102,24 +102,32 @@ map <F11> :Ant install<CR>
 " Maximize current split
 map <F12> <C-w><C-_>
 
+" Easier way to jump between splits
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 noremap <C-l> <C-w>l
 map <C-h> <C-w>h
 
+" Easier way to increase / decrease the size of splits
 map + 5<C-W>+
 map - 5<C-W>-
 map <C-+> <C-W>+
 map <C--> <C-W>-
 
 map zw zCzO
+" Get the file under the cursor in a split
 map gf :sp <cfile><CR>
+" Change to the directory the current file is in
 map ,cd :exe 'cd ' . expand ("%:p:h")<CR>
+" This should soooo be what Y does (like D, innit?)
 map Y y$
 
+" Easy ways to handle my config files
 nmap ,.s :source $MYVIMRC<CR>
 nmap ,.v :sp $MYVIMRC<CR>
 nmap ,.c :sp $HOME/.cshrc<CR>
+
+" If you can figure out what this one does, I'll buy you lunch
 nmap ,fpm :s/, *[a-z]*/ + ", " + /eg<CR>:s/([a-z]*/(" +/<CR>:s/)[^()]*$/ + ")\\n");/<CR>:s/^\([[:space:]]*\)/\1print("/<CR>:s/" +  + "//g<CR>:s/+ \[\] \(\$[a-zA-Z0-9_]*\)/+ stringArrayToString(\1, ",")/g<CR>
 
 " Toggle word
