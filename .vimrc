@@ -152,6 +152,8 @@ let twitvim_enable_python = 1
 " Tag list
 let Tlist_Exit_OnlyWindow = 1
 
+let g:SuperTabDefaultCompletionType = "context"
+
 filetype plugin indent on
 filetype on
 filetype plugin on
