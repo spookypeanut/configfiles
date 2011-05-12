@@ -25,6 +25,9 @@ set scrolloff=2
 set laststatus=2
 set history=500
 
+map ; :
+noremap ;; ;
+
 " Colours
 syntax enable
 set t_Co=256
