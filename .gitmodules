@@ -16,3 +16,6 @@
 [submodule ".vim/taglist"]
 	path = .vim/taglist
 	url = http://github.com/learnjin/taglist.vim.git
+[submodule ".vim/pyflakes-vim"]
+	path = .vim/pyflakes-vim
+	url = https://github.com/kevinw/pyflakes-vim.git

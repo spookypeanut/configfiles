@@ -153,3 +153,5 @@ let twitvim_enable_python = 1
 let Tlist_Exit_OnlyWindow = 1
 
 filetype plugin indent on
+filetype on
+filetype plugin on
