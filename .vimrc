@@ -3,7 +3,8 @@
 set tabstop=4
 set shiftwidth=4
 set autoindent
-" set smartindent
+set expandtab
+
 set foldmethod=indent
 set nofoldenable
 
@@ -51,8 +52,6 @@ au BufRead,BufNewFile *.ma set filetype=mel
 set guioptions-=T
 set guioptions-=m
 set gfn=Monospace\ 9
-
-set expandtab
 
 " Auto-close brackets
 inoremap {      {}<Left>
