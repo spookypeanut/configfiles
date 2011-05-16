@@ -25,8 +25,18 @@ set scrolloff=2
 set laststatus=2
 set history=500
 
+set gdefault
+set colorcolumn=80
+
 map ; :
 noremap ;; ;
+"
+" Use "magic" regexps (ie, fewer backslashes) (trial)
+nnoremap / /\v
+vnoremap / /\v
+
+nnoremap <tab> %
+vnoremap <tab> %
 
 " Colours
 syntax enable
@@ -35,18 +45,12 @@ colo peaksea
 
 " Show whitespace
 set list
-set listchars=tab:>-,eol:$
+set listchars=tab:▸\ ,eol:¬
 hi SpecialKey cterm=NONE ctermfg=1 guifg=DarkRed
 hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
 " From http://vimcasts.org/episodes/show-invisibles/
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
-
-highlight OverLength ctermbg=53 guibg=#592929
-" 7.2 only
-" au BufWinEnter * let w:m2=matchadd('OverLength', '\%>80v.\+', -1)*/
-match OverLength /\%80v.\+/
-"au BufRead,BufNewFile * syntax match OverLength /\%>80v.\+/
 
 " Mappings
 au BufRead,BufNewFile *.sdl,*.jdl set filetype=fcdl
@@ -75,12 +79,16 @@ inoremap [[     [
 inoremap []     []
 inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 
+" Select the text you just pasted
+nnoremap <leader>v V`]
+
 " Map function keys
 
+map <F1> :set relativenumber!<CR>
 " Comment out a single line / range
 map <F2> \c 
 " Search for any line longer than 80 characters
-map <F3> /.\{81,\}<CR>
+map <F3> /.{81,}<CR>
 " Open the "tag list" (function definition list, etc) and 
 " the project tree (eclim)
 map <F4> :TlistToggle<CR>:ProjectTree<CR>
@@ -124,6 +132,12 @@ map ,cd :exe 'cd ' . expand ("%:p:h")<CR>
 " This should soooo be what Y does (like D, innit?)
 map Y y$
 
+" Yank/paste to the OS clipboard with ,y and ,p
+nmap <leader>y "+y
+nmap <leader>Y "+yy
+nmap <leader>p "+p
+nmap <leader>P "+P<
+
 " Easy ways to handle my config files
 nmap ,.s :source $MYVIMRC<CR>
 nmap ,.v :sp $MYVIMRC<CR>
@@ -143,11 +157,11 @@ nmap ,vu :VCSUpdate<CR>
 nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
 
+
 nmap ,gg :!git gui<CR>
 
 " Rename all instances of current word in file
 nmap ,rf :%s/\<<c-r>=expand("<cword>")<cr>\>//g
-
 
 " TwitVim
 let twitvim_enable_python = 1
@@ -157,6 +171,7 @@ let Tlist_Exit_OnlyWindow = 1
 
 let g:SuperTabDefaultCompletionType = "context"
 
+" Not sure how many of these are needed...
 filetype plugin indent on
 filetype on
 filetype plugin on
