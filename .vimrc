@@ -45,7 +45,7 @@ colo peaksea
 
 " Show whitespace
 set list
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸-,eol:↵
 hi SpecialKey cterm=NONE ctermfg=1 guifg=DarkRed
 hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
 " From http://vimcasts.org/episodes/show-invisibles/
