@@ -15,4 +15,6 @@
     vim = difftool --tool=vimdiff
     co = checkout
     current-branch = "!git symbolic-ref HEAD 2> /dev/null | sed -e 's#refs/heads/##'"
-    pull2 = "!git fetch origin && git rebase -p origin/$(git current-branch)"
+    pull2 = "!git fetch origin && ( git pull --ff-only || git rebase -p origin/$(git current-branch))"
+[rerere]
+	enabled = 1
