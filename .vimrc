@@ -87,7 +87,7 @@ nnoremap <leader>v V`]
 
 " Map function keys
 
-map <F1> :set relativenumber!<CR>
+map <F1> :if exists("relativenumber") <Bar> :set relativenumber! <Bar> else <Bar> :set number! <Bar> endif <CR>
 " Comment out a single line / range
 map <F2> \c 
 " Search for any line longer than 80 characters
@@ -97,7 +97,7 @@ map <F3> /.{81,}<CR>
 map <F4> :TlistToggle<CR>:ProjectTree<CR>
 
 " Toggle highlighting of search terms
-map <F5> :set hls!<bar>set hls?<CR>
+map <F5> :set hls!<bar>set hls?<CR>:PyflakesUpdate<CR>
 " Toggle syntax
 map <F6> :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
 " Toggle folding
@@ -135,7 +135,7 @@ map ,cd :exe 'cd ' . expand ("%:p:h")<CR>
 " This should soooo be what Y does (like D, innit?)
 map Y y$
 
-" Yank/paste to the OS clipboard with ,y and ,p
+" Yank/paste to the OS clipboard with \y and \p
 nmap <leader>y "+y
 nmap <leader>Y "+yy
 nmap <leader>p "+p
@@ -171,6 +171,7 @@ let twitvim_enable_python = 1
 
 " Tag list
 let Tlist_Exit_OnlyWindow = 1
+let Tlist_WinWidth = 50
 
 let g:SuperTabDefaultCompletionType = "context"
 
