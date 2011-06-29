@@ -25,7 +25,6 @@ set scrolloff=2
 set laststatus=2
 set history=500
 
-set gdefault
 if exists('+colorcolumn')
   set colorcolumn=80
 else
