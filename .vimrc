@@ -163,6 +163,14 @@ let VCSCommandGitDiffOpt="--no-ext-diff"
 
 nmap ,gg :!git gui<CR>
 
+noremap ,gp :call Svndiff("prev")<CR> 
+noremap ,gn :call Svndiff("next")<CR> 
+noremap ,gc :call Svndiff("clear")<CR> 
+
+hi DiffAdd      ctermfg=0 ctermbg=2 guibg='green' 
+hi DiffDelete   ctermfg=0 ctermbg=1 guibg='red' 
+hi DiffChange   ctermfg=0 ctermbg=3 guibg='yellow' 
+
 " Rename all instances of current word in file
 nmap ,rf :%s/\<<c-r>=expand("<cword>")<cr>\>//g
 
