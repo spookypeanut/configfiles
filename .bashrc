@@ -1,14 +1,12 @@
 # ENVIRONMENT VARIABLES
-PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
 PS1='\w$ '
+PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
 LD_LIBRARY_PATH=/usr/local/lib
 EDITOR="/usr/bin/gvim --nofork"
 PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
+export PS1 PKG_CONFIG_PATH LD_LIBRARY_PATH EDITOR PYTHONPATH
 PAGER="vimman"
 MANPAGER="vimman"
-PATH=$PATH:$HOME/android-sdk-linux_86/platform-tools/:$HOME/android-sdk-linux_86/tools/
-ANDROID_LOG_TAGS="*:E WakeMe@:V"
-export PS1 PKG_CONFIG_PATH LD_LIBRARY_PATH EDITOR PYTHONPATH PATH
 
 # ALIASES
 alias ls='ls --color=auto'
@@ -22,24 +20,16 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias gos='echo "You are not at work now! Relax!"'
-alias gop='gos'
-alias gox='gos'
-
 alias np='cat >/dev/null'
 alias h='history | grep -i '
 alias p='ps -ef | grep -i '
-alias start='gnome-open'
 
 alias vim='vim -o'
 alias make='time make'
-alias scummvm='scummvm -d5'
 
-alias v.b='vim ~/.bashrc'
+alias v.b='vim ~/.bashrc*'
 alias v.v='vim ~/.vimrc'
 alias kie='pkill -SEGV wineserver'
-alias temp='test -f /sys/devices/virtual/thermal/thermal_zone0/temp && cat /sys/devices/virtual/thermal/thermal_zone0/temp'
-alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
 
 alias ..='cd ..'
 alias .2='cd ../..'
@@ -50,11 +40,6 @@ alias .6='cd ../../../../../..'
 alias .7='cd ../../../../../../..'
 alias .8='cd ../../../../../../../..'
 alias .9='cd ../../../../../../../../..'
-
-# Wine / VM
-alias paf="wine $HOME/.wine/drive_c/Program\ Files/FamilySearch/Paf5/paf5.exe"
-alias autostitch="wine $HOME/autostitch/autostitch.exe"
-alias ida='VirtualBox --startvm ida'
 
 # Misspellings
 alias cd..='cd ..'
@@ -73,9 +58,6 @@ function cdd {
 }
 function g {
 	grep -li $* *;
-}
-function svd {
-	svn diff $* | vim -;
 }
 function cw {
 	cat $(which $*)
@@ -112,3 +94,27 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=5000
 HISTFILESIZE=4000
+
+# Test if we're in framestore
+if [ -e /job/fscfc/ ]; then
+    alias go='. go-bash'
+
+    # Anything that shouldn't be published to the web goes in this file
+    source .bashrc.fscfc
+else
+    alias start='gnome-open'
+
+    # Wine / VM
+    alias paf="wine $HOME/.wine/drive_c/Program\ Files/FamilySearch/Paf5/paf5.exe"
+    alias autostitch="wine $HOME/autostitch/autostitch.exe"
+    alias ida='VirtualBox --startvm ida'
+
+    alias temp='test -f /sys/devices/virtual/thermal/thermal_zone0/temp && cat /sys/devices/virtual/thermal/thermal_zone0/temp'
+    alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
+    alias scummvm='scummvm -d5'
+
+    PATH=$PATH:$HOME/android-sdk-linux_86/platform-tools/:$HOME/android-sdk-linux_86/tools/
+    ANDROID_LOG_TAGS="*:E WakeMe@:V"
+    export PATH ANDROID_LOG_TAGS
+fi
+
