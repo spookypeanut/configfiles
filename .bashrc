@@ -1,14 +1,15 @@
 # ENVIRONMENT VARIABLES
-PS1='\w$ '
-PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
-LD_LIBRARY_PATH=/usr/local/lib
-EDITOR="/usr/bin/gvim --nofork"
-PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
-export PS1 PKG_CONFIG_PATH LD_LIBRARY_PATH EDITOR PYTHONPATH
-PAGER="vimman"
-MANPAGER="vimman"
+export PS1='\w$ '
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
+export LD_LIBRARY_PATH=/usr/local/lib
+export EDITOR="/usr/bin/gvim --nofork"
+export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
+export MANPAGER="vimman"
+export PATH=$HOME/bin:${PATH}
 
 # ALIASES
+alias bc='bc -l'
+
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias lrt='ls -lrt'
@@ -43,6 +44,7 @@ alias .9='cd ../../../../../../../../..'
 
 # Misspellings
 alias cd..='cd ..'
+alias cd-='cd -'
 alias ls#='ls'
 alias grerp='grep'
 
@@ -98,9 +100,10 @@ HISTFILESIZE=4000
 # Test if we're in framestore
 if [ -e /job/fscfc/ ]; then
     alias go='. go-bash'
+    alias findBroken='for i in $(find -type l ) ; do [ -e $i ] || echo -e "Broken: \e[31;1m$i\e[0m" ; done'
 
     # Anything that shouldn't be published to the web goes in this file
-    source .bashrc.fscfc
+    source ~/.bashrc.fscfc
 else
     alias start='gnome-open'
 
@@ -113,8 +116,7 @@ else
     alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
     alias scummvm='scummvm -d5'
 
-    PATH=$PATH:$HOME/android-sdk-linux_86/platform-tools/:$HOME/android-sdk-linux_86/tools/
-    ANDROID_LOG_TAGS="*:E WakeMe@:V"
-    export PATH ANDROID_LOG_TAGS
+    export PATH=$PATH:$HOME/android-sdk-linux_86/platform-tools/:$HOME/android-sdk-linux_86/tools/
+    export ANDROID_LOG_TAGS="*:E WakeMe@:V"
 fi
 
