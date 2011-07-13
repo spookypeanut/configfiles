@@ -14,6 +14,7 @@ alias ls='ls --color=auto'
 alias ll='ls -l'
 alias lrt='ls -lrt'
 alias lsd='ls -ld */'
+alias lf='ls -d $PWD/\!*'
 alias l='ls -CF'
 alias lcc='ls -l| grep -v "\.o$" | grep -v "\.a$"'
 
@@ -59,6 +60,7 @@ cw()    {cat $(which $*)}
 fw()    {file $(which $*)}
 lw()    {ls -l $(which $*)}
 vw()    {vim $(which $*)}
+pywhich() {python -c "import $1; print $1.__file__"'}
 
 # COMPLETIONS
 if [ -f /etc/bash_completion ]
@@ -85,6 +87,8 @@ HISTFILESIZE=4000
 
 # Test if we're in framestore
 if [ -e /job/fscfc/ ]; then
+    alias time='/usr/bin/time -p'
+    alias start='kfmclient exec'
     alias go='. go-bash'
     alias findBroken='for i in $(find -type l ) ; do [ -e $i ] || echo -e "Broken: \e[31;1m$i\e[0m" ; done'
 
