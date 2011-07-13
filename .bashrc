@@ -51,28 +51,14 @@ alias grerp='grep'
 # Git
 alias gg='git gui &'
 
-function gitk {
-    /usr/bin/gitk --all $* &
-}
-
-function cdd {
-	cd $(echo $* | sed 's_/.*$_/_g') ; 
-}
-function g {
-	grep -li $* *;
-}
-function cw {
-	cat $(which $*)
-}
-function fw {
-	file $(which $*)
-}
-function lw {
-	ls -l $(which $*)
-}
-function vw {
-	vim $(which $*)
-}
+lf()    {ls -d $PWD/$1*}
+gitk()  {/usr/bin/gitk --all $* &}
+cdd()   {cd $(echo $* | sed 's_/.*$_/_g')}
+g()     {grep -li $* *}
+cw()    {cat $(which $*)}
+fw()    {file $(which $*)}
+lw()    {ls -l $(which $*)}
+vw()    {vim $(which $*)}
 
 # COMPLETIONS
 if [ -f /etc/bash_completion ]
