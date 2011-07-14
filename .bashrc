@@ -61,6 +61,7 @@ gitk()  { /usr/bin/gitk --all $* & }
 # Tools
 alias np='cat >/dev/null'
 piechart() { du --max-depth=1 $* | sort -n; }
+echopath() { echo $* | tr ":" "\n"; }
 
 # Misspellings
 alias cd..='cd ..'
@@ -77,6 +78,15 @@ complete -cf cw
 complete -cf lw
 complete -cf fw
 complete -cf vw
+complete -cf sudo
+complete -cf which
+complete -cf man
+complete -cf strace
+complete -o dirnames cd
+complete -o dirnames rmdir
+complete -A user finger
+complete -A user groups
+complete -A user mail
 
 # HISTORY
 # don't put duplicate lines in the history. See bash(1) for more options
@@ -93,9 +103,13 @@ HISTFILESIZE=4000
 # Test if we're in framestore
 if [ -e /job/fscfc/ ]; then
     alias time='/usr/bin/time -p'
+    df() {
+        date
+        /bin/df $*
+        date
+    }
     alias start='kfmclient exec'
 
-    alias whereami='userHost $USER'
     alias findBroken='for i in $(find -type l ) ; do [ -e $i ] || echo -e "Broken: \e[31;1m$i\e[0m" ; done'
 
     # Anything that shouldn't be published to the web goes in this file
