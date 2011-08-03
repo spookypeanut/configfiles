@@ -44,11 +44,11 @@ vnoremap <tab> %
 " Colours
 syntax enable
 set t_Co=256
-colo peaksea
+colo mustang
 
 " Show whitespace
 set list
-set listchars=tab:▸-,eol:↵
+set listchars=tab:▸─,eol:◂
 hi SpecialKey cterm=NONE ctermfg=1 guifg=DarkRed
 hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
 " From http://vimcasts.org/episodes/show-invisibles/
@@ -61,37 +61,34 @@ au BufRead,BufNewFile *.ma set filetype=mel
 " Get rid of toolbar and menu in gvim
 set guioptions-=T
 set guioptions-=m
-set gfn=Monospace\ 9
+set gfn=Monospace\ 8
 
 " Auto-close brackets
-inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
-inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
+"inoremap {      {}<Left>
+"inoremap {<CR>  {<CR>}<Esc>O
+"inoremap {{     {
+"inoremap {}     {}
+"inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 
-inoremap (      ()<Left>
-inoremap (<CR>  (<CR>)<Esc>O
-inoremap ((     (
-inoremap ()     ()
-inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+"inoremap (      ()<Left>
+"inoremap (<CR>  (<CR>)<Esc>O
+"inoremap ((     (
+"inoremap ()     ()
+"inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
 
-inoremap [      []<Left>
-inoremap [<CR>  [<CR>]<Esc>O
-inoremap [[     [
-inoremap []     []
-inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
-
-" Select the text you just pasted
-nnoremap <leader>v V`]
+"inoremap [      []<Left>
+"inoremap [<CR>  [<CR>]<Esc>O
+"inoremap [[     [
+"inoremap []     []
+"inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 
 " Map function keys
 
 map <F1> :if exists("relativenumber") <Bar> :set relativenumber! <Bar> else <Bar> :set number! <Bar> endif <CR>
 " Comment out a single line / range
-map <F2> \c 
+map <F1> \c 
 " Search for any line longer than 80 characters
-map <F3> /.{81,}<CR>
+map <F3> /.\{81,\}<CR>
 " Open the "tag list" (function definition list, etc) and 
 " the project tree (eclim)
 map <F4> :TlistToggle<CR>:ProjectTree<CR>
