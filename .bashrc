@@ -100,6 +100,7 @@ complete -cf cw
 complete -cf lw
 complete -cf fw
 complete -cf vw
+complete -cf screen
 
 # HISTORY
 # don't put duplicate lines in the history. See bash(1) for more options
