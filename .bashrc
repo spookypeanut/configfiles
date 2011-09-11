@@ -1,28 +1,33 @@
 # ENVIRONMENT VARIABLES
-PS1='\w$ '
-PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
-LD_LIBRARY_PATH=/usr/local/lib
-EDITOR="/usr/bin/gvim --nofork"
-PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
-export PS1 PKG_CONFIG_PATH LD_LIBRARY_PATH EDITOR PYTHONPATH
-PAGER="vimman"
-MANPAGER="vimman"
+export PS1='\w$ '
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
+export LD_LIBRARY_PATH=/usr/local/lib
+export EDITOR="/usr/bin/gvim --nofork"
+export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
+export MANPAGER="vimman"
+export PATH=$HOME/bin:${PATH}
 
-# ALIASES
+# Output a core please maya
+export MAYA_DEBUG_NO_SIGNAL_HANDLERS=1
+
+# ALIASES & FUNCTIONS
+# Default settings
+alias bc='bc -l'
 alias ls='ls --color=auto'
+alias grep='grep --color=auto -I'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Abbreviations
 alias ll='ls -l'
 alias lrt='ls -lrt'
 alias lsd='ls -ld */'
 alias l='ls -CF'
 alias lcc='ls -l| grep -v "\.o$" | grep -v "\.a$"'
+g() { grep -li $* *; }
 
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-alias np='cat >/dev/null'
 alias h='history | grep -i '
-alias p='ps -ef | grep -i '
+alias p='ps -ef | grep -v grep | grep -i '
 
 alias vim='vim -o'
 alias make='time make'
@@ -41,48 +46,48 @@ alias .6='cd ../../../../../..'
 alias .7='cd ../../../../../../..'
 alias .8='cd ../../../../../../../..'
 alias .9='cd ../../../../../../../../..'
+cdd()   { cd $(echo $* | sed 's_/[^/]*$_/_g'); }
 
-# Misspellings
-alias cd..='cd ..'
-alias ls#='ls'
-alias grerp='grep'
+lf()    { ls -d $PWD/$1*; }
+cw()    { cat $(which $*); }
+fw()    { file $(which $*); }
+lw()    { ls -l $(which $*); }
+vw()    { vim $(which $*); }
+pywhich() { python -c "import $1; print $1.__file__"; }
 
 # Git
 alias gg='git gui &'
+gitk()  { /usr/bin/gitk --all $* & }
 
-function gitk {
-    /usr/bin/gitk --all $* &
-}
+# Tools
+alias np='cat >/dev/null'
+piechart() { du --max-depth=1 $* | sort -n; }
+echopath() { echo $* | tr ":" "\n"; }
 
-function cdd {
-	cd $(echo $* | sed 's_/.*$_/_g') ; 
-}
-function g {
-	grep -li $* *;
-}
-function cw {
-	cat $(which $*)
-}
-function fw {
-	file $(which $*)
-}
-function lw {
-	ls -l $(which $*)
-}
-function vw {
-	vim $(which $*)
-}
+# Misspellings
+alias cd..='cd ..'
+alias cd-='cd -'
+alias ls#='ls'
+alias grerp='grep'
 
 # COMPLETIONS
-if [ -f /etc/bash_completion ]
-then
-	. /etc/bash_completion
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
 fi
 
 complete -cf cw
 complete -cf lw
 complete -cf fw
 complete -cf vw
+complete -cf sudo
+complete -cf which
+complete -cf man
+complete -cf strace
+complete -o dirnames cd
+complete -o dirnames rmdir
+complete -A user finger
+complete -A user groups
+complete -A user mail
 
 # HISTORY
 # don't put duplicate lines in the history. See bash(1) for more options
@@ -98,10 +103,18 @@ HISTFILESIZE=4000
 
 # Test if we're in framestore
 if [ -e /job/fscfc/ ]; then
-    alias go='. go-bash'
+    alias time='/usr/bin/time -p'
+    df() {
+        date
+        /bin/df $*
+        date
+    }
+    alias start='kfmclient exec'
+
+    alias findBroken='for i in $(find -type l ) ; do [ -e $i ] || echo -e "Broken: \e[31;1m$i\e[0m" ; done'
 
     # Anything that shouldn't be published to the web goes in this file
-    source .bashrc.fscfc
+    source ~/.bashrc.fscfc
 else
     alias start='gnome-open'
 
@@ -114,8 +127,7 @@ else
     alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
     alias scummvm='scummvm -d5'
 
-    PATH=$PATH:$HOME/android-sdk-linux_86/platform-tools/:$HOME/android-sdk-linux_86/tools/
-    ANDROID_LOG_TAGS="*:E WakeMe@:V"
-    export PATH ANDROID_LOG_TAGS
+    export PATH=$PATH:$HOME/android-sdk-linux_86/platform-tools/:$HOME/android-sdk-linux_86/tools/
+    export ANDROID_LOG_TAGS="*:E WakeMe@:V"
 fi
 
