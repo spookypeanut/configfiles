@@ -31,6 +31,7 @@ alias p='ps -ef | grep -v grep | grep -i '
 
 alias vim='vim -o'
 alias make='time make'
+alias ssh='ssh -Y'
 
 alias v.b='vim ~/.bashrc*'
 alias v.v='vim ~/.vimrc'
