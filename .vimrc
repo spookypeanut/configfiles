@@ -28,6 +28,7 @@ set history=500
 if exists('+colorcolumn')
   set colorcolumn=80
 else
+  " You can turn this off with :call matchdelete(w:m2)
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
@@ -109,6 +110,7 @@ map <F8> :%s/[[:space:]][[:space:]]*$//g
 map <F9> :Sexplore<CR>
 " Toggle paste
 map <F10> :set paste!<Bar>set paste?<CR>
+imap <F10> <Esc>:set paste!<Bar>set paste?<CR>a
 " Toggle line numbers
 "map <F11> :se nu!<CR>
 map <F11> :Ant install<CR>
@@ -120,6 +122,10 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 noremap <C-l> <C-w>l
 map <C-h> <C-w>h
+
+" Easier way to jump between errors
+map <C-.> :cn<CR>
+map <C-<> :cp<CR>
 
 " Easier way to increase / decrease the size of splits
 map + 5<C-W>+
@@ -145,6 +151,7 @@ nmap <leader>P "+P<
 nmap ,.s :source $MYVIMRC<CR>
 nmap ,.v :sp $MYVIMRC<CR>
 nmap ,.c :sp $HOME/.cshrc<CR>
+nmap ,.b :sp $HOME/.bashrc<CR>
 
 " If you can figure out what this one does, I'll buy you lunch
 nmap ,fpm :s/, *[a-z]*/ + ", " + /eg<CR>:s/([a-z]*/(" +/<CR>:s/)[^()]*$/ + ")\\n");/<CR>:s/^\([[:space:]]*\)/\1print("/<CR>:s/" +  + "//g<CR>:s/+ \[\] \(\$[a-zA-Z0-9_]*\)/+ stringArrayToString(\1, ",")/g<CR>
@@ -160,6 +167,39 @@ nmap ,vu :VCSUpdate<CR>
 nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
 
+" From http://stackoverflow.com/questions/4027222/vim-use-shorter-textwidth-in-comments-and-docstrings
+function! GetPythonTextWidth()
+    if !exists('g:python_normal_text_width')
+        let normal_text_width = 79
+    else
+        let normal_text_width = g:python_normal_text_width
+    endif
+
+    if !exists('g:python_comment_text_width')
+        let comment_text_width = 72
+    else
+        let comment_text_width = g:python_comment_text_width
+    endif
+
+    let cur_syntax = synIDattr(synIDtrans(synID(line("."), col("."), 0)), "name")
+    if cur_syntax == "Comment"
+        return comment_text_width
+    elseif cur_syntax == "String"
+        " Check to see if we're in a docstring
+        let lnum = line(".")
+        while lnum >= 1 && (synIDattr(synIDtrans(synID(lnum, col([lnum, "$"]) - 1, 0)), "name") == "String" || match(getline(lnum), '\v^\s*$') > -1)
+            if match(getline(lnum), "\\('''\\|\"\"\"\\)") > -1
+                " Assume that any longstring is a docstring
+                return comment_text_width
+            endif
+            let lnum -= 1
+        endwhile
+    endif
+
+    return normal_text_width
+endfunction
+
+autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
 
 nmap ,gg :!git gui<CR>
 
