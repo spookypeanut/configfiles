@@ -5,7 +5,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 export EDITOR="/usr/bin/gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
 export MANPAGER="vimman"
-export PATH=$HOME/bin:${PATH}
+export PATH=$HOME/bin:$HOME/apps/bin:${PATH}
 
 # Output a core please maya
 export MAYA_DEBUG_NO_SIGNAL_HANDLERS=1
@@ -145,7 +145,6 @@ else
     alias start='gnome-open'
 
     # Wine / VM
-    alias paf="wine $HOME/.wine/drive_c/Program\ Files/FamilySearch/Paf5/paf5.exe"
     alias autostitch="wine $HOME/autostitch/autostitch.exe"
     alias ida='VirtualBox --startvm ida'
 
