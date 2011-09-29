@@ -124,8 +124,8 @@ noremap <C-l> <C-w>l
 map <C-h> <C-w>h
 
 " Easier way to jump between errors
-map <C-.> :cn<CR>
-map <C-<> :cp<CR>
+map \e :cn<CR>
+map \E :cp<CR>
 
 " Easier way to increase / decrease the size of splits
 map + 5<C-W>+
