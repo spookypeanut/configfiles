@@ -1,6 +1,6 @@
 # Set escape character to ctrl-space.
 # Press ctrl-space followed by 'a' to send a ctrl-space to a program running in your screen.
-escape ^a 
+#escape ^a 
 
 # Force terminal to 256-color.
 #term screen-256color
