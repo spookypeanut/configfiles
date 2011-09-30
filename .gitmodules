@@ -19,3 +19,9 @@
 [submodule ".vim/pyflakes-vim"]
 	path = .vim/pyflakes-vim
 	url = https://github.com/kevinw/pyflakes-vim.git
+[submodule ".vim/tagbar"]
+	path = .vim/tagbar
+	url = https://github.com/majutsushi/tagbar
+[submodule ".vim/pathogen"]
+	path = .vim/pathogen
+	url = https://github.com/tpope/vim-pathogen.git

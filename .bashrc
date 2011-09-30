@@ -5,7 +5,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 export EDITOR="/usr/bin/gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
 export MANPAGER="vimman"
-export PATH=$HOME/bin:${PATH}
+export PATH=$HOME/bin:$HOME/apps/bin:${PATH}
 
 # Output a core please maya
 export MAYA_DEBUG_NO_SIGNAL_HANDLERS=1
@@ -63,6 +63,17 @@ gitk()  { /usr/bin/gitk --all $* & }
 alias np='cat >/dev/null'
 piechart() { du --max-depth=1 $* | sort -n; }
 echopath() { echo $* | tr ":" "\n"; }
+findinpath() {
+    if [ -z "$2" ]; then
+        pathtouse=$PATH
+    else
+        pathtouse=$2
+    fi
+    #echo "Using path $pathtouse"
+    for i in $(echo $pathtouse | tr ':' ' '); do
+        ls $i/$1
+    done
+}
 
 # Misspellings
 alias cd..='cd ..'
@@ -82,12 +93,27 @@ complete -cf vw
 complete -cf sudo
 complete -cf which
 complete -cf man
+complete -cf type
 complete -cf strace
 complete -o dirnames cd
 complete -o dirnames rmdir
 complete -A user finger
 complete -A user groups
 complete -A user mail
+
+testcompletefunction() {
+    echo "\n"
+    echo "COMP_CWORD: $COMP_CWORD"
+    echo "COMP_LINE: $COMP_LINE"
+    echo "COMP_POINT: $COMP_POINT"
+    echo "COMP_WORDS: $COMP_WORDS"
+
+    echo "\n"
+    COMPREPLY="COMPREPLY"
+    echo "\n"
+}
+
+complete -F testcompletefunction testcomplete
 
 # HISTORY
 # don't put duplicate lines in the history. See bash(1) for more options
@@ -119,7 +145,6 @@ else
     alias start='gnome-open'
 
     # Wine / VM
-    alias paf="wine $HOME/.wine/drive_c/Program\ Files/FamilySearch/Paf5/paf5.exe"
     alias autostitch="wine $HOME/autostitch/autostitch.exe"
     alias ida='VirtualBox --startvm ida'
 
