@@ -41,18 +41,7 @@ defbce "on"
 # %c          current time, like HH:MM.
 # %H          hostname
 
-# Status line from a comment at : http://www.linuxjournal.com/article/6340?page=0,2
-#hardstatus alwayslastline
-#hardstatus string '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c ]%{W}'
-
-# Status line from: http://blog.eater.org/2008/12/new-screenrc-hardstatus-string.html
-#hardstatus alwayslastline
-#hardstatus string "%{= ky}%-Lw%{=r}%20>%n %t%{= ky}%+Lw %{= ky}%-=| %{= ky}%Y-%m-%d %c%{-} | ${USER}@%H "
-#hardstatus string "%{= ky}%-Lw%{=r}%20>%n %t%{= ky}%+Lw %{= ky}%-=| %{= kw}%Y-%m-%d %c%{-} | %{=r} ${USER}@%H "
-
-# http://tuxtraining.com/2009/10/12/gnu-screen-theme-cycle-with-keybinding
-
-caption always "%{= Kb} %-Lw%{= kb} %n: %{= kW}%t %{= Kb}%+Lw %-="
+caption always "%{= Kk} %-Lw%{= kb} %n: %{= kW}%t %{= Kb}%+Lw %-= %c"
 #hardstatus string "%{= kW}%t %-= %{= kb}Session: %u%{= kW}%4` | %{= kb}Host: %{= kW}%H | %{= kb}Mem: %{= kW}%2`MB | %{= kb}Swap: %{= kW}%3`MB | %{= kb}%d %M %{= kW}%c"
 hardstatus ignore
 
@@ -78,10 +67,7 @@ sorendition WK
 #backtick 4 30 30 get_sessionname
 
 ## Example auto-starts.
-screen -t maya  0 /bin/bash -i -c 'export KEEP_PROMPT=1; go gravity; bash'
-screen -t vim  1 /bin/bash -i -c 'export KEEP_PROMPT=1; go $GIT; cd plassetcore/source/plassetapi; bash'
-screen -t unittest  2 /bin/bash -i -c 'cat /job/pipeline/dev/sandbox/sandbox_hbush/unittests.txt; bash'
-screen -t bash  3 /bin/bash
+screen -t bash 0 /bin/bash
 
 ##############################################################################
 # BOOL VARIABLES
