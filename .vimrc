@@ -34,6 +34,8 @@ endif
 
 map ; :
 noremap ;; ;
+"repeat the last command and put the cursor at start of change
+map . .`[
 "
 " Use "magic" regexps (ie, fewer backslashes) (trial)
 nnoremap / /\v
