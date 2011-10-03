@@ -42,6 +42,7 @@ defbce "on"
 # %H          hostname
 
 caption always "%{= Kk} %-Lw%{= kb} %n: %{= kW}%t %{= Kb}%+Lw %-= %c"
+caption always "%{= Wk} %-Lw%{= kB} %n: %{= kW}%t %{= Wk}%+Lw %-= %c"
 #hardstatus string "%{= kW}%t %-= %{= kb}Session: %u%{= kW}%4` | %{= kb}Host: %{= kW}%H | %{= kb}Mem: %{= kW}%2`MB | %{= kb}Swap: %{= kW}%3`MB | %{= kb}%d %M %{= kW}%c"
 hardstatus ignore
 
