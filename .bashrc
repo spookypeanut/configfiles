@@ -68,6 +68,8 @@ alias cd..='cd ..'
 alias cd-='cd -'
 alias ls#='ls'
 alias grerp='grep'
+alias mv='mv -i'
+alias cp='cp -i'
 
 # COMPLETIONS
 if [ -f /etc/bash_completion ]; then
