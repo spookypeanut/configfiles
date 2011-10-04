@@ -1,34 +1,36 @@
-# Set escape character to ctrl-space.
-# Press ctrl-space followed by 'a' to send a ctrl-space to a program running in your screen.
-#escape ^a 
-
-# Force terminal to 256-color.
-#term screen-256color
-attrcolor b ".I"    # allow bold colors - necessary for some reason
-termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
-
 # Detach on hangup
 autodetach on
 
-# This makes sure the mouse works properly in vim (etc.).
-termcapinfo linux|xterm|rxvt|xterm-color|xterm-256color ti@:te@:XT 
+# 15k lines of history should be enough for anyone.
+defscrollback 15000
 
-# Make xterm scrollback work, by using normal buffer, not alternate.
-termcapinfo xterm|xterms|xs|xterm-color|xterm-256color ti=\E7\E[?47l
+# How long a window waits for silence before alerting you.
+silencewait 15 # default: 30
 
-## terminfo and termcap for nice 256 color terminal
-## allow bold colors - necessary for some reason
-attrcolor b ".i"
+# Don't display the "logged in" flag
+deflogin off
+# Monitor all windows for activity
+defmonitor on
+activity ''
 
-# Dim ends up underlined, disable dim
-attrcolor d -d
+## Example auto-starts.
+source .screenwindows
 
-## tell screen how to set colors. ab = background, af=foreground
-termcapinfo xterm|xterms|xs|xterm-color|xterm-256color 'co#256:ab=\e[48;5;%dm:af=\e[38;5;%dm'
+##############################################################################
+# BINDINGS
+##############################################################################
 
-# erase background with current bg color
-defbce "on"
+#  Toggle 'fullscreen' or not.
+bind f eval "caption splitonly"
+bind F eval "caption always"
 
+# Ctrl left and right
+bindkey ^[[1;5D prev
+bindkey ^[[1;5C next
+
+##############################################################################
+# DISPLAY
+##############################################################################
 # Status line semaphore cheat sheet:
 # %{= ky}     set color to yellow on black.
 # %{= yk}     set color to black on yellow.
@@ -41,33 +43,33 @@ defbce "on"
 # %c          current time, like HH:MM.
 # %H          hostname
 
-caption always "%{= Wk} %-Lw%{= kB} %n: %{= kW}%t %{= Wk}%+Lw %-= %c"
-#hardstatus string "%{= kW}%t %-= %{= kb}Session: %u%{= kW}%4` | %{= kb}Host: %{= kW}%H | %{= kb}Mem: %{= kW}%2`MB | %{= kb}Swap: %{= kW}%3`MB | %{= kb}%d %M %{= kW}%c"
+caption always "%{= Wk} %-Lw%{= kB} %n: %{= kW}%t %{= Wk}%+Lw %-= %H %c"
 hardstatus ignore
 
-#  Toggle 'fullscreen' or not.
-bind f eval "caption splitonly"
-bind F eval "caption always"
-
-# Make messages appear in reverse video (selection colours)
-hardstatus off
-
 # Set selection (and now message) colours
-sorendition WK
+sorendition WY
 
-# ^L tells you your filename, total lines, and current position in percentage.
-# ^L is supposed to duplicate ^G's functionality in vim, but it doesn't seem to do anything, so I'm using it for this.
-#bindkey ^L screen $HOME/bin/screen_theme.sh
+attrcolor b ".I"    # allow bold colors - necessary for some reason
+# tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
-# Backticks to display information in status bar
-# These are in my $HOME/bin dir, or equivalent, added to $PATH in .bashrc.
-#backtick 1 30 30 get_uptime
-#backtick 2 30 30 get_freemem
-#backtick 3 30 30 get_freeswap
-#backtick 4 30 30 get_sessionname
+## tell screen how to set colors. ab = background, af=foreground
+termcapinfo xterm|xterms|xs|xterm-color|xterm-256color 'co#256:ab=\e[48;5;%dm:af=\e[38;5;%dm'
 
-## Example auto-starts.
-screen -t bash 0 /bin/bash
+# This makes sure the mouse works properly in vim (etc.).
+termcapinfo linux|xterm|rxvt|xterm-color|xterm-256color ti@:te@:XT 
+
+# Make xterm scrollback work, by using normal buffer, not alternate.
+termcapinfo xterm|xterms|xs|xterm-color|xterm-256color ti=\E7\E[?47l
+
+## allow bold colors - necessary for some reason
+attrcolor b ".i"
+
+# Dim ends up underlined, disable dim
+attrcolor d -d
+
+# Erase background with current bg color
+defbce "on"
 
 ##############################################################################
 # BOOL VARIABLES
@@ -90,9 +92,3 @@ hardcopydir   $HOME/.screen
 
 ##############################################################################
 # NUMBER VARIABLES
-# 5k lines of history should be enough for anyone.
-defscrollback 5000
-
-# How long a window waits for silence before alerting you.
-silencewait 15 # default: 30
-
