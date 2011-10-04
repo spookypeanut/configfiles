@@ -73,7 +73,7 @@ sorendition WK
 #backtick 4 30 30 get_sessionname
 
 ## Example auto-starts.
-screen -t bash 0 /bin/bash
+source .screenwindows
 
 ##############################################################################
 # BOOL VARIABLES
