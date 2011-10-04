@@ -41,7 +41,12 @@ defbce "on"
 # %c          current time, like HH:MM.
 # %H          hostname
 
-caption always "%{= Kk} %-Lw%{= kb} %n: %{= kW}%t %{= Kb}%+Lw %-= %c"
+# Don't display the "logged in" flag
+deflogin off
+# Monitor all windows for activity
+defmonitor on
+activity ''
+
 caption always "%{= Wk} %-Lw%{= kB} %n: %{= kW}%t %{= Wk}%+Lw %-= %c"
 #hardstatus string "%{= kW}%t %-= %{= kb}Session: %u%{= kW}%4` | %{= kb}Host: %{= kW}%H | %{= kb}Mem: %{= kW}%2`MB | %{= kb}Swap: %{= kW}%3`MB | %{= kb}%d %M %{= kW}%c"
 hardstatus ignore
