@@ -25,13 +25,6 @@ set scrolloff=2
 set laststatus=2
 set history=500
 
-if exists('+colorcolumn')
-  set colorcolumn=80
-else
-  " You can turn this off with :call matchdelete(w:m2)
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
-
 map ; :
 noremap ;; ;
 "repeat the last command and put the cursor at start of change
@@ -58,6 +51,16 @@ hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
+set ruler
+if exists('+colorcolumn')
+    " 7.3 only
+    set colorcolumn=+1
+    hi ColorColumn ctermbg=235 guibg=DarkGrey
+else
+    " You can turn this off with :call matchdelete(w:m2)
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
 " Mappings
 au BufRead,BufNewFile *.sdl,*.jdl set filetype=fcdl
 au BufRead,BufNewFile *.ma set filetype=mel
@@ -65,6 +68,11 @@ au BufRead,BufNewFile *.ma set filetype=mel
 set guioptions-=T
 set guioptions-=m
 set gfn=Monospace\ 9
+
+
+" Persistant undo between sessions (7.3 only)
+set undofile
+set undodir=/tmp/undos
 
 " Auto-close brackets
 inoremap {      {}<Left>
@@ -90,7 +98,8 @@ nnoremap <leader>v V`]
 
 " Map function keys
 
-map <F1> :if exists("relativenumber") <Bar> :set relativenumber! <Bar> else <Bar> :set number! <Bar> endif <CR>
+" If we have relativenumber (7.3 only), turn it on
+map <F1> :if exists("+relativenumber") <Bar> :set relativenumber! <Bar> else <Bar> :set number! <Bar> endif <CR>
 " Comment out a single line / range
 map <F2> \c 
 " Search for any line longer than 80 characters
@@ -125,6 +134,9 @@ map <C-k> <C-w>k
 noremap <C-l> <C-w>l
 map <C-h> <C-w>h
 
+" Screen steals C-a. We could do C-a a, but C-s is easier in the muscle memory
+imap <C-s> <C-a>
+
 " Easier way to jump between errors
 map \e :cn<CR>
 map \E :cp<CR>
@@ -143,11 +155,7 @@ map ,cd :exe 'cd ' . expand ("%:p:h")<CR>
 " This should soooo be what Y does (like D, innit?)
 map Y y$
 
-" Yank/paste to the OS clipboard with \y and \p
-nmap <leader>y "+y
-nmap <leader>Y "+yy
-nmap <leader>p "+p
-nmap <leader>P "+P<
+set clipboard=unnamedplus
 
 " Easy ways to handle my config files
 nmap ,.s :source $MYVIMRC<CR>
