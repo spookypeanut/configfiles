@@ -23,6 +23,7 @@ source .screenwindows
 #  Toggle 'fullscreen' or not.
 bind f eval "caption splitonly"
 bind F eval "caption always"
+bind 0 eval "scrollback 0" "scrollback 15000"
 
 # Ctrl left and right
 bindkey ^[[1;5D prev
