@@ -221,9 +221,6 @@ hi DiffAdd      ctermfg=0 ctermbg=2 guibg='green'
 hi DiffDelete   ctermfg=0 ctermbg=1 guibg='red' 
 hi DiffChange   ctermfg=0 ctermbg=3 guibg='yellow' 
 
-" Rename all instances of current word in file
-nmap ,rf :%s/\<<c-r>=expand("<cword>")<cr>\>//g
-
 " TwitVim
 let twitvim_enable_python = 1
 
@@ -234,6 +231,6 @@ let Tlist_WinWidth = 50
 let g:SuperTabDefaultCompletionType = "context"
 
 " Not sure how many of these are needed...
-filetype plugin indent on
-filetype on
-filetype plugin on
+"filetype plugin indent on
+"filetype on
+"filetype plugin on
