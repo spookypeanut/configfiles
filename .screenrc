@@ -48,7 +48,7 @@ caption always "%{= Wk} %-Lw%{= kB} %n: %{= kW}%t %{= Wk}%+Lw %-= %H %c"
 hardstatus ignore
 
 # Set selection (and now message) colours
-sorendition WY
+sorendition WK
 
 attrcolor b ".I"    # allow bold colors - necessary for some reason
 # tell screen how to set colors. AB = background, AF=foreground
