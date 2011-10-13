@@ -5,6 +5,8 @@ set shiftwidth=4
 set autoindent
 set expandtab
 
+set backspace=indent,eol,start
+
 set foldmethod=indent
 set nofoldenable
 
@@ -38,7 +40,7 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " Colours
-syntax enable
+syntax on
 set t_Co=256
 colo peaksea
 
@@ -107,6 +109,8 @@ map <F3> /.{81,}<CR>
 " Open the "tag list" (function definition list, etc) and 
 " the project tree (eclim)
 map <F4> :TagbarToggle<CR>:ProjectTree<CR>
+" But lets have it open by default
+autocmd VimEnter * nested TagbarOpen
 
 " Toggle highlighting of search terms
 map <F5> :set hls!<bar>set hls?<CR>:PyflakesUpdate<CR>
@@ -229,8 +233,10 @@ let Tlist_Exit_OnlyWindow = 1
 let Tlist_WinWidth = 50
 
 let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
+let g:pyflakes_use_quickfix = 0
 
 " Not sure how many of these are needed...
-"filetype plugin indent on
-"filetype on
+filetype plugin indent on
+filetype on
 "filetype plugin on
