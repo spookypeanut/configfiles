@@ -239,4 +239,4 @@ let g:pyflakes_use_quickfix = 0
 " Not sure how many of these are needed...
 filetype plugin indent on
 filetype on
-"filetype plugin on
+filetype plugin on
