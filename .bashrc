@@ -157,3 +157,4 @@ else
     export ANDROID_LOG_TAGS="*:E WakeMe@:V"
 fi
 
+[[ -f "/home/hbush/.config/autopackage/paths-bash" ]] && . "/home/hbush/.config/autopackage/paths-bash"
