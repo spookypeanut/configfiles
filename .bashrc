@@ -17,6 +17,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto -I'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias screen='screen -x || screen -U'
 
 # Abbreviations
 alias ll='ls -l'
