@@ -146,7 +146,7 @@ else
     alias start='gnome-open'
 
     # Wine / VM
-    alias autostitch="wine $HOME/autostitch/autostitch.exe"
+    alias autostitch="wine $HOME/apps/autostitch/autostitch.exe"
     alias ida='VirtualBox --startvm ida'
 
     alias temp='test -f /sys/devices/virtual/thermal/thermal_zone0/temp && cat /sys/devices/virtual/thermal/thermal_zone0/temp'
