@@ -20,7 +20,7 @@ alias egrep='egrep --color=auto'
 alias screen='screen -x || screen -U'
 
 # Abbreviations
-alias ll='ls -l'
+alias ll='ls -lph --color=always --group-directories-first'
 alias lrt='ls -lrt'
 alias lsd='ls -ld */'
 alias l='ls -CF'
