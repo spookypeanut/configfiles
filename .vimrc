@@ -30,6 +30,9 @@ set history=500
 set directory=~/.vim/tmp    " Set swp file dir.
 set backupdir=~/.vim/tmp    " Set backup dir.
 
+" Source the .vimrc immediately after you save it.
+autocmd! bufwritepost .vimrc source %
+
 map ; :
 noremap ;; ;
 "repeat the last command and put the cursor at start of change
