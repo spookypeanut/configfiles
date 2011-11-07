@@ -27,6 +27,9 @@ set scrolloff=2
 set laststatus=2
 set history=500
 
+set directory=~/.vim/tmp    " Set swp file dir.
+set backupdir=~/.vim/tmp    " Set backup dir.
+
 map ; :
 noremap ;; ;
 "repeat the last command and put the cursor at start of change
