@@ -53,6 +53,10 @@ hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
+hi CursorLine cterm=NONE ctermbg=235 guibg=DarkGrey
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+
 set ruler
 if exists('+colorcolumn')
     " 7.3 only
