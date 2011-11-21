@@ -20,7 +20,7 @@ alias egrep='egrep --color=auto'
 alias screen='screen -x || screen -U'
 
 # Abbreviations
-alias ll='ls -l'
+alias ll='ls -lph --color=always --group-directories-first'
 alias lrt='ls -lrt'
 alias lsd='ls -ld */'
 alias l='ls -CF'
@@ -123,6 +123,8 @@ HISTCONTROL=ignoredups:ignorespace
 
 # append to the history file, don't overwrite it
 shopt -s histappend
+# if you try to run a directory, it cds to it instead
+shopt -s autocd
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=5000

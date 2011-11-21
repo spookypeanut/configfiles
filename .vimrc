@@ -30,6 +30,12 @@ set scrolloff=2
 set laststatus=2
 set history=500
 
+set directory=~/.vim/tmp    " Set swp file dir.
+set backupdir=~/.vim/tmp    " Set backup dir.
+
+" Source the .vimrc immediately after you save it.
+autocmd! bufwritepost .vimrc source %
+
 map ; :
 noremap ;; ;
 "repeat the last command and put the cursor at start of change
@@ -55,6 +61,10 @@ hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
 " From http://vimcasts.org/episodes/show-invisibles/
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
+
+hi CursorLine cterm=NONE ctermbg=235 guibg=DarkGrey
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
 
 set ruler
 if exists('+colorcolumn')
