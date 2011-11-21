@@ -1,9 +1,14 @@
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 " Settings
 " Indent and folding stuff
 set tabstop=4
 set shiftwidth=4
 set autoindent
 set expandtab
+
+set backspace=indent,eol,start
 
 set foldmethod=indent
 set nofoldenable
@@ -25,14 +30,16 @@ set scrolloff=2
 set laststatus=2
 set history=500
 
-if exists('+colorcolumn')
-  set colorcolumn=80
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
+set directory=~/.vim/tmp    " Set swp file dir.
+set backupdir=~/.vim/tmp    " Set backup dir.
+
+" Source the .vimrc immediately after you save it.
+autocmd! bufwritepost .vimrc source %
 
 map ; :
 noremap ;; ;
+"repeat the last command and put the cursor at start of change
+map . .`[
 "
 " Use "magic" regexps (ie, fewer backslashes) (trial)
 nnoremap / /\v
@@ -42,7 +49,7 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " Colours
-syntax enable
+syntax on
 set t_Co=256
 colo peaksea
 
@@ -55,6 +62,20 @@ hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
+hi CursorLine cterm=NONE ctermbg=235 guibg=DarkGrey
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+
+set ruler
+if exists('+colorcolumn')
+    " 7.3 only
+    set colorcolumn=+1
+    hi ColorColumn ctermbg=235 guibg=DarkGrey
+else
+    " You can turn this off with :call matchdelete(w:m2)
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
 " Mappings
 au BufRead,BufNewFile *.sdl,*.jdl set filetype=fcdl
 au BufRead,BufNewFile *.ma set filetype=mel
@@ -62,6 +83,11 @@ au BufRead,BufNewFile *.ma set filetype=mel
 set guioptions-=T
 set guioptions-=m
 set gfn=Monospace\ 9
+
+
+" Persistant undo between sessions (7.3 only)
+set undofile
+set undodir=/tmp/undos
 
 " Auto-close brackets
 inoremap {      {}<Left>
@@ -87,14 +113,17 @@ nnoremap <leader>v V`]
 
 " Map function keys
 
-map <F1> :if exists("relativenumber") <Bar> :set relativenumber! <Bar> else <Bar> :set number! <Bar> endif <CR>
+" If we have relativenumber (7.3 only), turn it on
+map <F1> :if exists("+relativenumber") <Bar> :set relativenumber! <Bar> else <Bar> :set number! <Bar> endif <CR>
 " Comment out a single line / range
 map <F2> \c 
 " Search for any line longer than 80 characters
 map <F3> /.{81,}<CR>
 " Open the "tag list" (function definition list, etc) and 
 " the project tree (eclim)
-map <F4> :TlistToggle<CR>:ProjectTree<CR>
+map <F4> :TagbarToggle<CR>:ProjectTree<CR>
+" But lets have it open by default
+autocmd VimEnter * nested TagbarOpen
 
 " Toggle highlighting of search terms
 map <F5> :set hls!<bar>set hls?<CR>:PyflakesUpdate<CR>
@@ -109,6 +138,7 @@ map <F8> :%s/[[:space:]][[:space:]]*$//g
 map <F9> :Sexplore<CR>
 " Toggle paste
 map <F10> :set paste!<Bar>set paste?<CR>
+imap <F10> <Esc>:set paste!<Bar>set paste?<CR>a
 " Toggle line numbers
 "map <F11> :se nu!<CR>
 map <F11> :Ant install<CR>
@@ -120,6 +150,13 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 noremap <C-l> <C-w>l
 map <C-h> <C-w>h
+
+" Screen steals C-a. We could do C-a a, but C-s is easier in the muscle memory
+imap <C-s> <C-a>
+
+" Easier way to jump between errors
+map \e :cn<CR>
+map \E :cp<CR>
 
 " Easier way to increase / decrease the size of splits
 map + 5<C-W>+
@@ -135,16 +172,13 @@ map ,cd :exe 'cd ' . expand ("%:p:h")<CR>
 " This should soooo be what Y does (like D, innit?)
 map Y y$
 
-" Yank/paste to the OS clipboard with \y and \p
-nmap <leader>y "+y
-nmap <leader>Y "+yy
-nmap <leader>p "+p
-nmap <leader>P "+P<
+set clipboard=unnamedplus
 
 " Easy ways to handle my config files
 nmap ,.s :source $MYVIMRC<CR>
 nmap ,.v :sp $MYVIMRC<CR>
 nmap ,.c :sp $HOME/.cshrc<CR>
+nmap ,.b :sp $HOME/.bashrc<CR>
 
 " If you can figure out what this one does, I'll buy you lunch
 nmap ,fpm :s/, *[a-z]*/ + ", " + /eg<CR>:s/([a-z]*/(" +/<CR>:s/)[^()]*$/ + ")\\n");/<CR>:s/^\([[:space:]]*\)/\1print("/<CR>:s/" +  + "//g<CR>:s/+ \[\] \(\$[a-zA-Z0-9_]*\)/+ stringArrayToString(\1, ",")/g<CR>
@@ -160,6 +194,39 @@ nmap ,vu :VCSUpdate<CR>
 nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
 
+" From http://stackoverflow.com/questions/4027222/vim-use-shorter-textwidth-in-comments-and-docstrings
+function! GetPythonTextWidth()
+    if !exists('g:python_normal_text_width')
+        let normal_text_width = 79
+    else
+        let normal_text_width = g:python_normal_text_width
+    endif
+
+    if !exists('g:python_comment_text_width')
+        let comment_text_width = 72
+    else
+        let comment_text_width = g:python_comment_text_width
+    endif
+
+    let cur_syntax = synIDattr(synIDtrans(synID(line("."), col("."), 0)), "name")
+    if cur_syntax == "Comment"
+        return comment_text_width
+    elseif cur_syntax == "String"
+        " Check to see if we're in a docstring
+        let lnum = line(".")
+        while lnum >= 1 && (synIDattr(synIDtrans(synID(lnum, col([lnum, "$"]) - 1, 0)), "name") == "String" || match(getline(lnum), '\v^\s*$') > -1)
+            if match(getline(lnum), "\\('''\\|\"\"\"\\)") > -1
+                " Assume that any longstring is a docstring
+                return comment_text_width
+            endif
+            let lnum -= 1
+        endwhile
+    endif
+
+    return normal_text_width
+endfunction
+
+autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
 
 nmap ,gg :!git gui<CR>
 
@@ -171,9 +238,6 @@ hi DiffAdd      ctermfg=0 ctermbg=2 guibg='green'
 hi DiffDelete   ctermfg=0 ctermbg=1 guibg='red' 
 hi DiffChange   ctermfg=0 ctermbg=3 guibg='yellow' 
 
-" Rename all instances of current word in file
-nmap ,rf :%s/\<<c-r>=expand("<cword>")<cr>\>//g
-
 " TwitVim
 let twitvim_enable_python = 1
 
@@ -182,6 +246,8 @@ let Tlist_Exit_OnlyWindow = 1
 let Tlist_WinWidth = 50
 
 let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
+let g:pyflakes_use_quickfix = 0
 
 " Not sure how many of these are needed...
 filetype plugin indent on

@@ -1,15 +1,12 @@
 [submodule ".vim/vcscommand"]
 	path = .vim/vcscommand
 	url = http://repo.or.cz/r/vcscommand.git
-[submodule ".vim/supertab"]
-	path = .vim/supertab
-	url = http://github.com/ervandew/supertab
 [submodule ".vim/nerdcommenter"]
 	path = .vim/nerdcommenter
 	url = http://github.com/scrooloose/nerdcommenter.git
 [submodule ".vim/supertab"]
 	path = .vim/supertab
-	url = http://github.com/ervandw/supertab.git
+	url = http://github.com/ervandew/supertab.git
 [submodule ".vim/twitvim"]
 	path = .vim/twitvim
 	url = http://github.com/developwithpassion/twitvim.git
@@ -19,3 +16,9 @@
 [submodule ".vim/pyflakes-vim"]
 	path = .vim/pyflakes-vim
 	url = https://github.com/kevinw/pyflakes-vim.git
+[submodule ".vim/tagbar"]
+	path = .vim/tagbar
+	url = https://github.com/majutsushi/tagbar
+[submodule ".vim/pathogen"]
+	path = .vim/pathogen
+	url = https://github.com/tpope/vim-pathogen.git

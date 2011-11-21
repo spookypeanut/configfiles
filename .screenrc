@@ -1,0 +1,95 @@
+# Detach on hangup
+autodetach on
+
+# 15k lines of history should be enough for anyone.
+defscrollback 15000
+
+# How long a window waits for silence before alerting you.
+silencewait 15 # default: 30
+
+# Don't display the "logged in" flag
+deflogin off
+# Monitor all windows for activity
+defmonitor on
+activity ''
+
+## Example auto-starts.
+source .screenwindows
+
+##############################################################################
+# BINDINGS
+##############################################################################
+
+#  Toggle 'fullscreen' or not.
+bind f eval "caption splitonly"
+bind F eval "caption always"
+bind 0 eval "scrollback 0" "scrollback 15000"
+
+# Ctrl left and right
+bindkey ^[[1;5D prev
+bindkey ^[[1;5C next
+
+##############################################################################
+# DISPLAY
+##############################################################################
+# Status line semaphore cheat sheet:
+# %{= ky}     set color to yellow on black.
+# %{= yk}     set color to black on yellow.
+# %{=r}       reverse the color attrs
+# %-Lw        all window #s, titles, and flags before the current window.
+# %n %t       current window number and title.
+# %+Lw        all windows #s, titles, and flags after the current window.
+# %-=         pad remaining spaces.
+# %M%d        month and day, like MmmDD.
+# %c          current time, like HH:MM.
+# %H          hostname
+
+caption always "%{= Wk} %-Lw%{= kB} %n: %{= kW}%t %{= Wk}%+Lw %-= %H %c"
+hardstatus ignore
+
+# Set selection (and now message) colours
+sorendition WK
+
+attrcolor b ".I"    # allow bold colors - necessary for some reason
+# tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+## tell screen how to set colors. ab = background, af=foreground
+termcapinfo xterm|xterms|xs|xterm-color|xterm-256color 'co#256:ab=\e[48;5;%dm:af=\e[38;5;%dm'
+
+# This makes sure the mouse works properly in vim (etc.).
+termcapinfo linux|xterm|rxvt|xterm-color|xterm-256color ti@:te@:XT 
+
+# Make xterm scrollback work, by using normal buffer, not alternate.
+termcapinfo xterm|xterms|xs|xterm-color|xterm-256color ti=\E7\E[?47l
+
+## allow bold colors - necessary for some reason
+attrcolor b ".i"
+
+# Dim ends up underlined, disable dim
+attrcolor d -d
+
+# Erase background with current bg color
+defbce "on"
+
+##############################################################################
+# BOOL VARIABLES
+# Ignore case for searches in copy mode.
+ignorecase on
+
+# Suppress splash screen.
+startup_message off
+
+# Visual bell.
+vbell off
+
+# Remove application (e.g. vim) output from screen on exit.
+altscreen on
+
+##############################################################################
+# PATH VARIABLES
+# hardcopydir:  The directory which contains all hardcopies.
+hardcopydir   $HOME/.screen
+
+##############################################################################
+# NUMBER VARIABLES
