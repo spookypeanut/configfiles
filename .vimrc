@@ -76,6 +76,7 @@ endif
 " Mappings
 au BufRead,BufNewFile *.sdl,*.jdl set filetype=fcdl
 au BufRead,BufNewFile *.ma set filetype=mel
+au BufRead,BufNewFile *.json set filetype=json
 " Get rid of toolbar and menu in gvim
 set guioptions-=T
 set guioptions-=m
