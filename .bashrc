@@ -120,6 +120,7 @@ complete -F testcompletefunction testcomplete
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
+HISTIGNORE="clear:bg:fg:cd:cd -:exit:date"
 
 # append to the history file, don't overwrite it
 shopt -s histappend
