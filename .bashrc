@@ -82,6 +82,8 @@ alias cd..='cd ..'
 alias cd-='cd -'
 alias ls#='ls'
 alias grerp='grep'
+alias mv='mv -i'
+alias cp='cp -i'
 
 # COMPLETIONS
 if [ -f /etc/bash_completion ]; then
@@ -92,6 +94,7 @@ complete -cf cw
 complete -cf lw
 complete -cf fw
 complete -cf vw
+complete -cf screen
 complete -cf sudo
 complete -cf which
 complete -cf man
