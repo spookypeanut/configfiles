@@ -123,7 +123,7 @@ map <F4> :TagbarToggle<CR>:ProjectTree<CR>
 autocmd VimEnter * nested TagbarOpen
 
 " Toggle highlighting of search terms
-map <F5> :set hls!<bar>set hls?<CR>:PyflakesUpdate<CR>
+map <F5> :set hls!<bar>set hls?<CR>
 " Toggle syntax
 map <F6> :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
 " Toggle folding
