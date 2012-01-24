@@ -5,7 +5,11 @@ export LD_LIBRARY_PATH=/usr/local/lib
 export EDITOR="/usr/bin/gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
 export MANPAGER="vimman"
-export PATH=$HOME/bin:$HOME/apps/bin:${PATH}
+export HOST=$HOSTNAME
+if [[ `uname` == "Linux" ]]; then
+    PATH=$HOME/apps/bin:${PATH}
+fi
+export PATH=$HOME/bin:${PATH}
 
 # Output a core please maya
 export MAYA_DEBUG_NO_SIGNAL_HANDLERS=1
@@ -31,6 +35,8 @@ alias h='history | grep -i '
 alias p='ps -ef | grep -v grep | grep -i '
 
 alias vim='vim -o'
+
+
 alias make='time make'
 alias ssh='ssh -Y'
 
@@ -47,7 +53,28 @@ alias .6='cd ../../../../../..'
 alias .7='cd ../../../../../../..'
 alias .8='cd ../../../../../../../..'
 alias .9='cd ../../../../../../../../..'
-cdd()   { cd $(echo $* | sed 's_/[^/]*$_/_g'); }
+# Directory management
+cd() {
+    CDHIST="$CDHIST:$PWD"  # Push directory
+    if [[ "$1" == "-" ]]
+    then rd
+    else
+        if [[ -z "$1" || -d "$1" ]]
+        then builtin cd "$@"
+        else builtin cd "$(dirname "$1")"
+        fi
+    fi
+}
+rd() {
+    if [[ ! -z "$CDHIST" ]]
+    then
+        builtin cd "${CDHIST##*:}"
+        CDHIST="${CDHIST%:*}"  # Pop directory
+    fi
+}
+cdhist() {
+    echo "$CDHIST" | tr ':' '\n'
+}
 
 lf()    { ls -d $PWD/$1*; }
 cw()    { cat $(which $*); }
@@ -64,7 +91,14 @@ gitk()  { /usr/bin/gitk --all $* & }
 # Tools
 alias np='cat >/dev/null'
 piechart() { du --max-depth=1 $* | sort -n; }
-echopath() { echo $* | tr ":" "\n"; }
+echopath() {
+    if [ -z "$1" ]; then
+        pathtouse=$PATH
+    else
+        pathtouse=$1
+    fi
+    echo $pathtouse | tr ":" "\n"
+}
 findinpath() {
     if [ -z "$2" ]; then
         pathtouse=$PATH
@@ -73,7 +107,9 @@ findinpath() {
     fi
     #echo "Using path $pathtouse"
     for i in $(echo $pathtouse | tr ':' ' '); do
-        ls $i/$1
+        if [ -e $i/$1 ]; then
+            ls $i/$1
+        fi
     done
 }
 
