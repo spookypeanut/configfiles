@@ -4,11 +4,12 @@ call pathogen#helptags()
 " Settings
 " Indent and folding stuff
 set tabstop=4
+set softtabstop=4
 set shiftwidth=4
 set autoindent
 set expandtab
 
-set backspace=indent,eol,start
+set backspace=eol,start
 
 set foldmethod=indent
 set nofoldenable
@@ -45,8 +46,15 @@ map . .`[
 nnoremap / /\v
 vnoremap / /\v
 
+" In normal and visual modes, use tab to jump between brackets
 nnoremap <tab> %
 vnoremap <tab> %
+
+" H and L go up and down the file in chunks
+nnoremap H 30k
+vnoremap H 30k
+nnoremap L 30j
+vnoremap L 30j
 
 " Colours
 syntax on
@@ -62,6 +70,8 @@ hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
+" Jump to the last known position in the file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 hi CursorLine cterm=NONE ctermbg=235 guibg=#333
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
@@ -90,25 +100,6 @@ set gfn=Monospace\ 9
 " Persistant undo between sessions (7.3 only)
 set undofile
 set undodir=/tmp/undos
-
-" Auto-close brackets
-inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
-inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
-
-inoremap (      ()<Left>
-inoremap (<CR>  (<CR>)<Esc>O
-inoremap ((     (
-inoremap ()     ()
-inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
-
-inoremap [      []<Left>
-inoremap [<CR>  [<CR>]<Esc>O
-inoremap [[     [
-inoremap []     []
-inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 
 " Select the text you just pasted
 nnoremap <leader>v V`]

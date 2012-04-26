@@ -44,7 +44,6 @@ alias v.b='vim ~/.bashrc*'
 alias v.v='vim ~/.vimrc'
 alias kie='pkill -SEGV wineserver'
 
-alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
@@ -166,6 +165,8 @@ HISTIGNORE="clear:bg:fg:cd:cd -:exit:date"
 shopt -s histappend
 # if you try to run a directory, it cds to it instead
 shopt -s autocd
+
+stty stop ^-    # I like ctrl-s, so set 'ctrl -' to stop the terminal instead
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=5000
