@@ -4,11 +4,12 @@ call pathogen#helptags()
 " Settings
 " Indent and folding stuff
 set tabstop=4
+set softtabstop=4
 set shiftwidth=4
 set autoindent
 set expandtab
 
-set backspace=indent,eol,start
+set backspace=eol,start
 
 set foldmethod=indent
 set nofoldenable
@@ -45,8 +46,15 @@ map . .`[
 nnoremap / /\v
 vnoremap / /\v
 
+" In normal and visual modes, use tab to jump between brackets
 nnoremap <tab> %
 vnoremap <tab> %
+
+" H and L go up and down the file in chunks
+nnoremap H 30k
+vnoremap H 30k
+nnoremap L 30j
+vnoremap L 30j
 
 " Colours
 syntax on
@@ -62,15 +70,17 @@ hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
-hi CursorLine cterm=NONE ctermbg=235 guibg=DarkGrey
+" Jump to the last known position in the file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+hi CursorLine cterm=NONE ctermbg=235 guibg=#333
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
 set ruler
 if exists('+colorcolumn')
     " 7.3 only
-    set colorcolumn=+1
-    hi ColorColumn ctermbg=235 guibg=DarkGrey
+    set colorcolumn=73,74,75,76,77,78,79
+    hi ColorColumn ctermbg=235 guibg=#333
 else
     " You can turn this off with :call matchdelete(w:m2)
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
@@ -78,6 +88,7 @@ endif
 
 " Mappings
 au BufRead,BufNewFile *.sdl,*.jdl set filetype=fcdl
+au BufRead,BufNewFile *.def set filetype=jobscheme
 au BufRead,BufNewFile *.ma set filetype=mel
 au BufRead,BufNewFile *.json set filetype=json
 " Get rid of toolbar and menu in gvim
@@ -89,25 +100,6 @@ set gfn=Monospace\ 9
 " Persistant undo between sessions (7.3 only)
 set undofile
 set undodir=/tmp/undos
-
-" Auto-close brackets
-inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
-inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
-
-inoremap (      ()<Left>
-inoremap (<CR>  (<CR>)<Esc>O
-inoremap ((     (
-inoremap ()     ()
-inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
-
-inoremap [      []<Left>
-inoremap [<CR>  [<CR>]<Esc>O
-inoremap [[     [
-inoremap []     []
-inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 
 " Select the text you just pasted
 nnoremap <leader>v V`]
@@ -125,6 +117,8 @@ map <F3> /.{81,}<CR>
 map <F4> :TagbarToggle<CR>:ProjectTree<CR>
 " But lets have it open by default
 autocmd VimEnter * nested TagbarOpen
+" But some things don't want it
+au FileType man TagbarClose
 
 " Toggle highlighting of search terms
 map <F5> :set hls!<bar>set hls?<CR>
@@ -153,7 +147,7 @@ noremap <C-l> <C-w>l
 map <C-h> <C-w>h
 
 " Screen steals C-a. We could do C-a a, but C-s is easier in the muscle memory
-imap <C-s> <C-a>
+map <C-s> <C-a>
 
 " Easier way to jump between errors
 map \e :cn<CR>
@@ -194,6 +188,12 @@ nmap ,vc :VCSCommit<CR>
 nmap ,vu :VCSUpdate<CR>
 nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
 let VCSCommandGitDiffOpt="--no-ext-diff"
+
+" Pypar creates a pair of python :param lines
+command -nargs=1 Pypar :normal o:param <args>: <CR>:type <args>: <CR><C-[>kkA
+" Pyret creates return lines
+command Pyret :normal o:return: <CR>:rtype: <CR><C-[>kkA
+    
 
 " From http://stackoverflow.com/questions/4027222/vim-use-shorter-textwidth-in-comments-and-docstrings
 function! GetPythonTextWidth()

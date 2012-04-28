@@ -4,6 +4,8 @@ set show-all-if-ambiguous on
 set mark-symlinked-directories on
 "[A": history-search-backward
 "[B": history-search-forward
+# Add an echo before the current line, and then run it
 "\C-k": "\C-[Iecho \C-m"
+# Remove the echo from before the previous line, then run it
 "\C-l": "\C-[\C-P^5x\C-j"
 "\C-x\"": "\"\"\C-b"
