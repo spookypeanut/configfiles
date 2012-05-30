@@ -29,7 +29,7 @@ alias lrt='ls -lrt'
 alias lsd='ls -ld */'
 alias l='ls -CF'
 alias lcc='ls -l| grep -v "\.o$" | grep -v "\.a$"'
-alias happyrsync='rsync --progress --stats -vv'
+alias happyrsync='rsync --progress --stats -vv -t'
 g() { grep -li $* *; }
 
 alias h='history | grep -i '
