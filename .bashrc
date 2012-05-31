@@ -76,6 +76,22 @@ cdhist() {
     echo "$CDHIST" | tr ':' '\n'
 }
 
+substr() { # $1 string, $2 start, $3 end
+    local start=$2
+    local end=$3
+    [[ -z $start ]] && start=0
+    [[ $start -lt 0 ]] && start=$[${#1} + $start]
+    [[ $start -lt 0 ]] && start=0
+    [[ -z $end ]] && end=${#1}
+    [[ $end -lt 0 ]] && end=$[${#1} + $end]
+    [[ $end -lt 0 ]] && end=0
+    len=$[$end - $start]
+    if [[ $len -gt 0 ]]
+    then
+        echo ${1:$start:$len}
+    fi
+}
+
 lf()    { ls -d $PWD/$1*; }
 cw()    { cat $(which $*); }
 fw()    { file $(which $*); }
@@ -174,6 +190,54 @@ stty stop ^-    # I like ctrl-s, so set 'ctrl -' to stop the terminal instead
 HISTSIZE=5000
 HISTFILESIZE=4000
 
+# Timing and error code printouts
+
+# Tie into the DEBUG event to get a zsh-like preexec hook
+# A more complete version at: http://glyf.livejournal.com/63106.html
+preexec() { :; }    # Default empty function
+postexec() { :; }   # Default empty function
+preexec_invoke_exec () {
+    [ -n "$COMP_LINE" ] && return  # Completing, do nothing
+    preexec "$(history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g")";
+}
+trap 'preexec_invoke_exec' DEBUG
+PROMPT_COMMAND='postexec'
+
+if [ -n "$STY" ]
+then
+    __host="$(hostname | sed 's/\..*//')"
+    __set_title() {
+        printf "\033k%s\033\\" "$1"
+        printf "\033]0;$__host:%s\007" "$1"
+    }
+    preexec() {
+        __set_title "($(substr "$1" 0 7)) $(substr "$(basename "$PWD/")" 0 5)"
+        [ -z $__cmd_time ] && __cmd_time="$(date '+%s')"
+    }
+    postexec() {
+        local exitcode=$?
+
+        # Set title to directory or $TITLE
+        [ -z "$TITLE" ] && __set_title "$(substr "$PWD/" -15)" || \
+            __set_title "$TITLE"
+
+        # Report the time the command took if greater than a threshold
+        local t=$[ $(date '+%s') - __cmd_time ]
+        if [ $t -gt 3 -o $exitcode -ne 0 ]
+        then
+            if [ $exitcode -ne 0 ]
+            then
+                echo -en " [Finished in $t seconds "
+                echo -e  "at $(date '+%H:%M:%S') with code $exitcode]\033[0m"
+            else
+                echo -en " [Finished in $t seconds "
+                echo -e  "at $(date '+%H:%M:%S')]\033[0m"
+            fi
+        fi
+        __cmd_time=
+    }
+fi
+
 # Test if we're in framestore
 if [ -e /job/fscfc/ ]; then
     alias time='/usr/bin/time -p'
@@ -203,4 +267,5 @@ else
     export ANDROID_LOG_TAGS="*:E WakeMe@:V"
 fi
 
-[[ -f "/home/hbush/.config/autopackage/paths-bash" ]] && . "/home/hbush/.config/autopackage/paths-bash"
+[[ -f "/home/hbush/.config/autopackage/paths-bash" ]] && . "/home/hbush/.config/autopackage/paths-bash" || true
+
