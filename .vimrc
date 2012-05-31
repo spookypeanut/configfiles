@@ -30,8 +30,11 @@ set scrolloff=2
 
 set laststatus=2
 set history=500
-
-set directory=~/.vim/tmp    " Set swp file dir.
+"
+" Set swp file dir. The two slashes at the end mean that it puts the whole
+" path into the filename, letting you have /tmp/blah.txt and ~/blah.txt open
+" simultaneously
+set directory=~/.vim/tmp//    
 set backupdir=~/.vim/tmp    " Set backup dir.
 
 " Source the .vimrc immediately after you save it.
