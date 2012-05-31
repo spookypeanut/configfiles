@@ -31,6 +31,7 @@ alias l='ls -CF'
 alias lcc='ls -l| grep -v "\.o$" | grep -v "\.a$"'
 alias happyrsync='rsync --progress --stats -vv -t'
 g() { grep -li $* *; }
+alias ipy="ipython"
 
 alias h='history | grep -i '
 alias p='ps -ef | grep -v grep | grep -i '
