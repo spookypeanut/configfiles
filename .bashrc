@@ -155,7 +155,7 @@ complete -cf type
 complete -cf strace
 complete -o dirnames cd
 complete -o dirnames rmdir
-complete -o dirnames -o filenames start
+complete -f -d start
 complete -A user finger
 complete -A user groups
 complete -A user mail
