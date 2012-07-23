@@ -38,6 +38,7 @@ alias p='ps -ef | grep -v grep | grep -i '
 
 alias vim='vim -o'
 
+alias nydate='TZ=America/New_York date'
 
 alias make='time make'
 alias ssh='ssh -Y'
@@ -103,7 +104,7 @@ mkdir() { /bin/mkdir "$@" && if [[ "$#" -eq 1 ]]; then cd "$1"; fi; }
 
 # Git
 alias gg='git gui &'
-gitk()  { /usr/bin/gitk --all $* & }
+gitk()  { git diff > /dev/null && /usr/bin/gitk --all $* & }
 
 # Tools
 alias np='cat >/dev/null'
@@ -118,7 +119,7 @@ echopath() {
 }
 findinpath() {
     if [ -z "$2" ]; then
-        pathtouse=$PATH
+        pathtouse=$PL_CONFIG_PATH
     else
         pathtouse=$2
     fi
@@ -247,9 +248,18 @@ if [ -e /job/fscfc/ ]; then
         /bin/df $*
         date
     }
+    module () 
+    { 
+        if [[ -z "$1" ]]; then
+            return;
+        fi;
+        eval "$(/usr/bin/modulecmd bash $*)" 2> /dev/null > /dev/null;
+    }
+
     alias start='kfmclient exec'
 
     alias findBroken='for i in $(find -type l ) ; do [ -e $i ] || echo -e "Broken: \e[31;1m$i\e[0m" ; done'
+
 
     # Anything that shouldn't be published to the web goes in this file
     source ~/.bashrc.fscfc
