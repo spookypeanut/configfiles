@@ -224,7 +224,7 @@ then
         local exitcode=$?
 
         # Set title to directory or $TITLE
-        [ -z "$TITLE" ] && __set_title "$(substr "$PWD/" -15)" || \
+        [ -z "$TITLE" ] && __set_title "$(substr "$PWD/" -10)" || \
             __set_title "$TITLE"
 
         # Report the time the command took if greater than a threshold
