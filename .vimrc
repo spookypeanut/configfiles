@@ -53,11 +53,11 @@ vnoremap / /\v
 nnoremap <tab> %
 vnoremap <tab> %
 
-" H and L go up and down the file in chunks
-nnoremap H 30k
-vnoremap H 30k
-nnoremap L 30j
-vnoremap L 30j
+" L and H go up and down the file in chunks
+nnoremap L 30k
+vnoremap L 30k
+nnoremap H 30j
+vnoremap H 30j
 
 " Colours
 syntax on
