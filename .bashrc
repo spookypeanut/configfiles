@@ -32,6 +32,10 @@ alias lcc='ls -l| grep -v "\.o$" | grep -v "\.a$"'
 alias happyrsync='rsync --progress --stats -vv -t'
 g() { grep -li $* *; }
 alias ipy="ipython"
+# Can't do this as a function, so here's a cheap hack
+echo 'rmdir $* 2> /dev/null && echo "Removed $*"; true;' > ~/bin/_rmdir_verbose_no_error
+chmod 755 ~/bin/_rmdir_verbose_no_error
+alias prunedirs='find -depth -type d -exec _rmdir_verbose_no_error {} \;'
 
 alias h='history | grep -i '
 alias p='ps -ef | grep -v grep | grep -i '
