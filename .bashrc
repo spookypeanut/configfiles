@@ -2,7 +2,7 @@
 export PS1='\w$ '
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
 export LD_LIBRARY_PATH=/usr/local/lib
-export EDITOR="/usr/bin/gvim --nofork"
+export EDITOR="gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
 export MANPAGER="vimman"
 export HOST=$HOSTNAME
@@ -32,12 +32,17 @@ alias lcc='ls -l| grep -v "\.o$" | grep -v "\.a$"'
 alias happyrsync='rsync --progress --stats -vv -t'
 g() { grep -li $* *; }
 alias ipy="ipython"
+# Can't do this as a function, so here's a cheap hack
+echo 'rmdir $* 2> /dev/null && echo "Removed $*"; true;' > ~/bin/_rmdir_verbose_no_error
+chmod 755 ~/bin/_rmdir_verbose_no_error
+alias prunedirs='find -depth -type d -exec _rmdir_verbose_no_error {} \;'
 
 alias h='history | grep -i '
 alias p='ps -ef | grep -v grep | grep -i '
 
 alias vim='vim -o'
 
+alias nydate='TZ=America/New_York date'
 
 alias make='time make'
 alias ssh='ssh -Y'
@@ -103,7 +108,7 @@ mkdir() { /bin/mkdir "$@" && if [[ "$#" -eq 1 ]]; then cd "$1"; fi; }
 
 # Git
 alias gg='git gui &'
-gitk()  { /usr/bin/gitk --all $* & }
+gitk()  { git diff > /dev/null && /usr/bin/gitk --all $* & }
 
 # Tools
 alias np='cat >/dev/null'
@@ -118,7 +123,7 @@ echopath() {
 }
 findinpath() {
     if [ -z "$2" ]; then
-        pathtouse=$PATH
+        pathtouse=$PL_CONFIG_PATH
     else
         pathtouse=$2
     fi
@@ -219,7 +224,7 @@ then
         local exitcode=$?
 
         # Set title to directory or $TITLE
-        [ -z "$TITLE" ] && __set_title "$(substr "$PWD/" -15)" || \
+        [ -z "$TITLE" ] && __set_title "$(substr "$PWD/" -10)" || \
             __set_title "$TITLE"
 
         # Report the time the command took if greater than a threshold
@@ -247,9 +252,18 @@ if [ -e /job/fscfc/ ]; then
         /bin/df $*
         date
     }
+    module () 
+    { 
+        if [[ -z "$1" ]]; then
+            return;
+        fi;
+        eval "$(/usr/bin/modulecmd bash $*)" 2> /dev/null > /dev/null;
+    }
+
     alias start='kfmclient exec'
 
     alias findBroken='for i in $(find -type l ) ; do [ -e $i ] || echo -e "Broken: \e[31;1m$i\e[0m" ; done'
+
 
     # Anything that shouldn't be published to the web goes in this file
     source ~/.bashrc.fscfc
