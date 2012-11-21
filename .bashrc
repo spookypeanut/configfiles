@@ -189,10 +189,17 @@ export HISTIGNORE="clear:bg:fg:cd:cd -:exit:date:ll:..:gitk:gg"
 export HISTSIZE=15000
 export HISTFILESIZE=20000
 
+# SHELL OPTIONS
 # append to the history file, don't overwrite it
 shopt -s histappend
 # if you try to run a directory, it cds to it instead
 shopt -s autocd
+# check the window size after each command and update LINES and COLUMNS
+shopt -s checkwinsize
+# attempt to save all lines of a multi-line command in the same history entry
+shopt -s cmdhist
+# don't attempt to search the PATH for completion of an empty line
+shopt -s no_empty_cmd_completion
 
 # This stuff is only for interactive shells
 if [ -t 0 ]; then
