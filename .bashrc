@@ -183,8 +183,11 @@ complete -F testcompletefunction testcomplete
 # HISTORY
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
-HISTIGNORE="clear:bg:fg:cd:cd -:exit:date"
+export HISTCONTROL=erasedups:ignorespace
+export HISTIGNORE="clear:bg:fg:cd:cd -:exit:date:ll:..:gitk:gg"
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+export HISTSIZE=15000
+export HISTFILESIZE=20000
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -197,9 +200,6 @@ if [ -t 0 ]; then
     stty stop ^-    # I like ctrl-s, so set 'ctrl -' to stop the terminal instead
 fi
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=5000
-HISTFILESIZE=4000
 
 # Timing and error code printouts
 
