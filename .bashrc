@@ -36,6 +36,7 @@ alias ipy="ipython"
 echo 'rmdir $* 2> /dev/null && echo "Removed $*"; true;' > ~/bin/_rmdir_verbose_no_error
 chmod 755 ~/bin/_rmdir_verbose_no_error
 alias prunedirs='find -depth -type d -exec _rmdir_verbose_no_error {} \;'
+alias start='gnome-open'
 
 alias h='history | grep -i '
 alias p='ps -ef | grep -v grep | grep -i '
@@ -264,15 +265,12 @@ if [ -e /job/fscfc/ ]; then
         eval "$(/usr/bin/modulecmd bash $*)" 2> /dev/null > /dev/null;
     }
 
-    alias start='kfmclient exec'
-
     alias findBroken='for i in $(find -type l ) ; do [ -e $i ] || echo -e "Broken: \e[31;1m$i\e[0m" ; done'
 
 
     # Anything that shouldn't be published to the web goes in this file
     source ~/.bashrc.fscfc
 else
-    alias start='gnome-open'
 
     # Wine / VM
     alias autostitch="wine $HOME/apps/autostitch/autostitch.exe"
