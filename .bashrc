@@ -50,7 +50,6 @@ alias ssh='ssh -Y'
 
 alias v.b='vim ~/.bashrc*'
 alias v.v='vim ~/.vimrc'
-alias kie='pkill -SEGV wineserver'
 
 alias .2='cd ../..'
 alias .3='cd ../../..'
