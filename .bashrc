@@ -1,5 +1,4 @@
 # ENVIRONMENT VARIABLES
-export PS1='\w$ '
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
 export LD_LIBRARY_PATH=/usr/local/lib
 export EDITOR="gvim --nofork"
