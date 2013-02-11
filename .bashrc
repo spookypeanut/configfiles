@@ -1,3 +1,21 @@
+if [ -e /job/fscfc/ ]; then
+    AT_FRAMESTORE=1
+else
+    AT_FRAMESTORE=0
+fi
+
+# Check if we're running SL6
+if [ $AT_FRAMESTORE -eq 1 ]; then
+    if python -c "import sys; sys.exit(0 if 'el6' in '$(uname -a)' else 1)"; then
+        # If so, run the default bashrc
+        if [ -f /etc/bashrc ]; then
+            source /etc/bashrc
+        fi
+    else
+        source go-bash-setup
+    fi
+fi
+
 # ENVIRONMENT VARIABLES
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
 export LD_LIBRARY_PATH=/usr/local/lib
@@ -256,7 +274,7 @@ then
 fi
 
 # Test if we're in framestore
-if [ -e /job/fscfc/ ]; then
+if [ $AT_FRAMESTORE -eq 1 ]; then
     alias time='/usr/bin/time -p'
     df() {
         date
