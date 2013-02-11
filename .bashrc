@@ -29,6 +29,7 @@ alias lrt='ls -lrt'
 alias lsd='ls -ld */'
 alias l='ls -CF'
 alias lcc='ls -l| grep -v "\.o$" | grep -v "\.a$"'
+alias lnc='ls -l --color=never'
 alias happyrsync='rsync --progress --stats -vv -t'
 g() { grep -li $* *; }
 alias ipy="ipython"
