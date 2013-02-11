@@ -190,7 +190,11 @@ shopt -s histappend
 # if you try to run a directory, it cds to it instead
 shopt -s autocd
 
-stty stop ^-    # I like ctrl-s, so set 'ctrl -' to stop the terminal instead
+# This stuff is only for interactive shells
+if [ -t 0 ]; then
+    export PS1='\w$ '
+    stty stop ^-    # I like ctrl-s, so set 'ctrl -' to stop the terminal instead
+fi
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=5000
