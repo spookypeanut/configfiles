@@ -276,21 +276,6 @@ fi
 # Test if we're in framestore
 if [ $AT_FRAMESTORE -eq 1 ]; then
     alias time='/usr/bin/time -p'
-    df() {
-        date
-        /bin/df $*
-        date
-    }
-    module () 
-    { 
-        if [[ -z "$1" ]]; then
-            return;
-        fi;
-        eval "$(/usr/bin/modulecmd bash $*)" 2> /dev/null > /dev/null;
-    }
-
-    alias findBroken='for i in $(find -type l ) ; do [ -e $i ] || echo -e "Broken: \e[31;1m$i\e[0m" ; done'
-
 
     # Anything that shouldn't be published to the web goes in this file
     source ~/.bashrc.fscfc
