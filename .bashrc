@@ -130,7 +130,7 @@ findinpath() {
     #echo "Using path $pathtouse"
     for i in $(echo $pathtouse | tr ':' ' '); do
         if [ -e $i/$1 ]; then
-            ls $i/$1
+            ls -d $i/$1
         fi
     done
 }
