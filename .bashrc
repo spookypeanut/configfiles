@@ -274,7 +274,7 @@ if [ -e /job/fscfc/ ]; then
 else
     alias t="todo.sh"
     export TODOTXT_DEFAULT_ACTION=ls
-    alias start='gnome-open'
+    alias start='xdg-open'
 
     # Wine / VM
     alias autostitch="wine $HOME/apps/autostitch/autostitch.exe"
