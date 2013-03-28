@@ -244,6 +244,10 @@ then
     }
 fi
 
+if [ -e $HOME/apps/todo.txt_cli/todo_completion ]; then
+    source $HOME/apps/todo.txt_cli/todo_completion
+fi
+
 # Test if we're in framestore
 if [ -e /job/fscfc/ ]; then
     alias time='/usr/bin/time -p'
@@ -268,6 +272,8 @@ if [ -e /job/fscfc/ ]; then
     # Anything that shouldn't be published to the web goes in this file
     source ~/.bashrc.fscfc
 else
+    alias t="todo.sh"
+    export TODOTXT_DEFAULT_ACTION=ls
     alias start='gnome-open'
 
     # Wine / VM
