@@ -1,5 +1,22 @@
+if [ -e /job/fscfc/ ]; then
+    AT_FRAMESTORE=1
+else
+    AT_FRAMESTORE=0
+fi
+
+# Check if we're running SL6
+if [ $AT_FRAMESTORE -eq 1 ]; then
+    if python -c "import sys; sys.exit(0 if 'el6' in '$(uname -a)' else 1)"; then
+        # If so, run the default bashrc
+        if [ -f /etc/bashrc ]; then
+            source /etc/bashrc
+        fi
+    else
+        source go-bash-setup
+    fi
+fi
+
 # ENVIRONMENT VARIABLES
-export PS1='\w$ '
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
 export LD_LIBRARY_PATH=/usr/local/lib
 export EDITOR="gvim --nofork"
@@ -29,6 +46,7 @@ alias lrt='ls -lrt'
 alias lsd='ls -ld */'
 alias l='ls -CF'
 alias lcc='ls -l| grep -v "\.o$" | grep -v "\.a$"'
+alias lnc='ls -l --color=never'
 alias happyrsync='rsync --progress --stats -vv -t'
 g() { grep -li $* *; }
 alias ipy="ipython"
@@ -36,6 +54,7 @@ alias ipy="ipython"
 echo 'rmdir $* 2> /dev/null && echo "Removed $*"; true;' > ~/bin/_rmdir_verbose_no_error
 chmod 755 ~/bin/_rmdir_verbose_no_error
 alias prunedirs='find -depth -type d -exec _rmdir_verbose_no_error {} \;'
+alias start='xdg-open'
 
 alias h='history | grep -i '
 alias p='ps -ef | grep -v grep | grep -i '
@@ -49,7 +68,6 @@ alias ssh='ssh -Y'
 
 alias v.b='vim ~/.bashrc*'
 alias v.v='vim ~/.vimrc'
-alias kie='pkill -SEGV wineserver'
 
 alias .2='cd ../..'
 alias .3='cd ../../..'
@@ -130,7 +148,7 @@ findinpath() {
     #echo "Using path $pathtouse"
     for i in $(echo $pathtouse | tr ':' ' '); do
         if [ -e $i/$1 ]; then
-            ls $i/$1
+            ls -d $i/$1
         fi
     done
 }
@@ -182,19 +200,30 @@ complete -F testcompletefunction testcomplete
 # HISTORY
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
-HISTIGNORE="clear:bg:fg:cd:cd -:exit:date"
+export HISTCONTROL=erasedups:ignorespace
+export HISTIGNORE="clear:bg:fg:cd:cd -:exit:date:ls:ll:..:g.:gitk:gg"
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+export HISTSIZE=15000
+export HISTFILESIZE=20000
 
+# SHELL OPTIONS
 # append to the history file, don't overwrite it
 shopt -s histappend
 # if you try to run a directory, it cds to it instead
 shopt -s autocd
+# check the window size after each command and update LINES and COLUMNS
+shopt -s checkwinsize
+# attempt to save all lines of a multi-line command in the same history entry
+shopt -s cmdhist
+# don't attempt to search the PATH for completion of an empty line
+shopt -s no_empty_cmd_completion
 
-stty stop ^-    # I like ctrl-s, so set 'ctrl -' to stop the terminal instead
+# This stuff is only for interactive shells
+if [ -t 0 ]; then
+    export PS1='\w$ '
+    stty stop ^-    # I like ctrl-s, so set 'ctrl -' to stop the terminal instead
+fi
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=5000
-HISTFILESIZE=4000
 
 # Timing and error code printouts
 
@@ -249,32 +278,15 @@ if [ -e $HOME/apps/todo.txt_cli/todo_completion ]; then
 fi
 
 # Test if we're in framestore
-if [ -e /job/fscfc/ ]; then
+if [ $AT_FRAMESTORE -eq 1 ]; then
     alias time='/usr/bin/time -p'
-    df() {
-        date
-        /bin/df $*
-        date
-    }
-    module () 
-    { 
-        if [[ -z "$1" ]]; then
-            return;
-        fi;
-        eval "$(/usr/bin/modulecmd bash $*)" 2> /dev/null > /dev/null;
-    }
-
-    alias start='kfmclient exec'
-
-    alias findBroken='for i in $(find -type l ) ; do [ -e $i ] || echo -e "Broken: \e[31;1m$i\e[0m" ; done'
-
 
     # Anything that shouldn't be published to the web goes in this file
     source ~/.bashrc.fscfc
 else
     alias t="todo.sh"
     export TODOTXT_DEFAULT_ACTION=ls
-    alias start='xdg-open'
+
 
     # Wine / VM
     alias autostitch="wine $HOME/apps/autostitch/autostitch.exe"
