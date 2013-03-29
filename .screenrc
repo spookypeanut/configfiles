@@ -24,6 +24,7 @@ source .screenwindows
 bind f eval "caption splitonly"
 bind F eval "caption always"
 bind 0 eval "scrollback 0" "scrollback 15000"
+bind _ eval "clear" "scrollback 0" "scrollback 15000"
 
 # Ctrl left and right
 bindkey ^[[1;5D prev
@@ -32,6 +33,17 @@ bindkey ^[[1;5C next
 ##############################################################################
 # DISPLAY
 ##############################################################################
+# Force terminal to 256-color.
+#term screen-256color
+attrcolor b ".I"    # allow bold colors - necessary for some reason
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
+
+## terminfo and termcap for nice 256 color terminal
+## allow bold colors - necessary for some reason
+attrcolor b ".i"
+# Dim ends up underlined, disable dim
+attrcolor d -d
+
 # Status line semaphore cheat sheet:
 # %{= ky}     set color to yellow on black.
 # %{= yk}     set color to black on yellow.
@@ -72,6 +84,13 @@ attrcolor d -d
 # Erase background with current bg color
 defbce "on"
 
+#  Toggle 'fullscreen' or not.
+bind f eval "caption splitonly"
+bind F eval "caption always"
+
+# Make messages appear in reverse video (selection colours)
+hardstatus off
+
 ##############################################################################
 # BOOL VARIABLES
 # Ignore case for searches in copy mode.
@@ -93,3 +112,8 @@ hardcopydir   $HOME/.screen
 
 ##############################################################################
 # NUMBER VARIABLES
+# 5k lines of history should be enough for anyone.
+defscrollback 5000
+
+# How long a window waits for silence before alerting you.
+silencewait 15 # default: 30
