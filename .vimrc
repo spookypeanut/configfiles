@@ -120,10 +120,10 @@ map <F3> /.{81,}<CR>
 " Open the "tag list" (function definition list, etc) and 
 " the project tree (eclim)
 map <F4> :TagbarToggle<CR>:ProjectTree<CR>
-" But lets have it open by default
-autocmd VimEnter * nested TagbarOpen
+" Commented out: let's not have it since the close doesn't work
+"autocmd VimEnter * nested TagbarOpen
 " But some things don't want it
-au FileType man TagbarClose
+"au FileType man TagbarClose
 
 " Toggle highlighting of search terms
 map <F5> :set hls!<bar>set hls?<CR>
