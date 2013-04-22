@@ -180,6 +180,9 @@ nmap ,.v :sp $MYVIMRC<CR>
 nmap ,.c :sp $HOME/.cshrc<CR>
 nmap ,.b :sp $HOME/.bashrc<CR>
 
+" Replaces all instances of the work under the cursor with something else
+nmap ,r :%s/\<<C-r>=expand("<cword>")<CR>\>//g<Left><Left>
+
 " If you can figure out what this one does, I'll buy you lunch
 nmap ,fpm :s/, *[a-z]*/ + ", " + /eg<CR>:s/([a-z]*/(" +/<CR>:s/)[^()]*$/ + ")\\n");/<CR>:s/^\([[:space:]]*\)/\1print("/<CR>:s/" +  + "//g<CR>:s/+ \[\] \(\$[a-zA-Z0-9_]*\)/+ stringArrayToString(\1, ",")/g<CR>
 
