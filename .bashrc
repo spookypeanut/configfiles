@@ -201,7 +201,9 @@ complete -F testcompletefunction testcomplete
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 export HISTCONTROL=erasedups:ignorespace
-export HISTIGNORE="clear:bg:fg:cd:cd -:exit:date:ls:ll:..:g.:gitk:gg"
+# HISTIGNORE should *only* contain things that you never want to do
+# twice in a row
+export HISTIGNORE="clear:bg:fg:cd:exit"
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 export HISTSIZE=15000
 export HISTFILESIZE=20000
