@@ -222,10 +222,12 @@ shopt -s no_empty_cmd_completion
 
 # This stuff is only for interactive shells
 if [ -t 0 ]; then
-    export PS1='\w$ '
+    export PS1='$_SHELL_TITLE\w$ '
     stty stop ^-    # I like ctrl-s, so set 'ctrl -' to stop the terminal instead
 fi
-
+labelshell() {
+    export _SHELL_TITLE="$@ "
+}
 
 # Timing and error code printouts
 
