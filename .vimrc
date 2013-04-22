@@ -113,6 +113,10 @@ nnoremap <leader>v V`]
 
 " If we have relativenumber (7.3 only), turn it on
 map <F1> :if exists("+relativenumber") <Bar> :set relativenumber! <Bar> else <Bar> :set number! <Bar> endif <CR>
+" In fact, turn relativenumber on always
+if exists("+relativenumber")
+    set relativenumber
+endif
 " Comment out a single line / range
 map <F2> \c 
 " Search for any line longer than 80 characters
