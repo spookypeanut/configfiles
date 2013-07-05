@@ -23,10 +23,6 @@ export EDITOR="gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
 export MANPAGER="vimman"
 export HOST=$HOSTNAME
-if [[ `uname` == "Linux" ]]; then
-    PATH=$HOME/apps/bin:${PATH}
-fi
-export PATH=$HOME/bin:${PATH}
 
 # Output a core please maya
 export MAYA_DEBUG_NO_SIGNAL_HANDLERS=1
