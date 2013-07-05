@@ -39,6 +39,8 @@ alias grep='grep --color=auto -I'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias screen='screen -x || screen -U'
+alias mpq='mplayer -nosound'
+alias lsdvd='lsdvd | sed "/^$/d"'
 
 # Abbreviations
 alias ll='ls -lph --color=always --group-directories-first'
