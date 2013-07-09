@@ -17,6 +17,11 @@ if [ $AT_FRAMESTORE -eq 1 ]; then
 fi
 
 # ENVIRONMENT VARIABLES
+# I'd love to set this only in .profile, but thanks to /etc/bashrc.global I can't
+if [[ `uname` == "Linux" ]]; then
+    PATH=$HOME/apps/bin:${PATH}
+fi
+export PATH=$HOME/bin:${PATH}
 #export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
 export EDITOR="gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
