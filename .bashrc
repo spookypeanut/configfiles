@@ -17,12 +17,10 @@ if [ $AT_FRAMESTORE -eq 1 ]; then
 fi
 
 # ENVIRONMENT VARIABLES
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
-export LD_LIBRARY_PATH=/usr/local/lib
+#export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
 export EDITOR="gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
 export MANPAGER="vimman"
-export HOST=$HOSTNAME
 
 # Output a core please maya
 export MAYA_DEBUG_NO_SIGNAL_HANDLERS=1
