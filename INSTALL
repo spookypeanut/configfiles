@@ -10,4 +10,8 @@ for i in .bashrc .vimrc .vim .inputrc .profile .screenrc todo.cfg; do
     ln -s configfiles/$i .
 done
 
+for i in vimman; do
+    ln -s configfiles/$i ./bin/
+done
+
 echo "Now copy across the .bashrc.fscfc if necessary"
