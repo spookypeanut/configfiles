@@ -59,6 +59,7 @@ alias lnc='ls -l --color=never'
 alias happyrsync='rsync --progress --stats -vv -t'
 g() { grep -li $* *; }
 alias ipy="ipython"
+alias py="python"
 # Can't do this as a function, so here's a cheap hack
 echo 'rmdir $* 2> /dev/null && echo "Removed $*"; true;' > ~/bin/_rmdir_verbose_no_error
 chmod 755 ~/bin/_rmdir_verbose_no_error
@@ -68,6 +69,7 @@ alias start='xdg-open'
 alias h='history | grep -i '
 alias p='ps -ef | grep -v grep | grep -i '
 
+alias vi='vim'
 alias vim='vim -o'
 
 alias nydate='TZ=America/New_York date'
