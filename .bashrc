@@ -152,7 +152,7 @@ echopath() {
 }
 findinpath() {
     if [ -z "$2" ]; then
-        pathtouse=$PL_CONFIG_PATH
+        pathtouse=$(plconfigpath)
     else
         pathtouse=$2
     fi
