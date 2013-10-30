@@ -8,12 +8,15 @@ BASHMAJOR=$(bash --version | head -n1 | sed 's/[^0-9]*\([0-9]*\).*/\1/')
 
 # Check if we're running SL6
 if [ $AT_FRAMESTORE -eq 1 ]; then
+    ONSL6=0
     R="/etc/redhat-release"
-    if [ -f $R -a "$(cat $R | head -c28)" == "Scientific Linux release 6.3" ]; then
-        # If so, run the default bashrc
-        if [ -f /etc/bashrc ]; then
-            source /etc/bashrc
+    if [ -f $R ]; then
+        if [ "$(cat $R | head -c28)" == "Scientific Linux release 6.3" ]; then
+            ONSL6=1
         fi
+    fi
+    if [ $ONSL6 == 1 ]; then
+        source /etc/bashrc
     elif [ -e /job/fscfc/common/bin/go-bash-setup ]; then
         source go-bash-setup
     fi
