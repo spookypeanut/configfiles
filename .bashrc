@@ -46,7 +46,11 @@ alias egrep='egrep --color=auto'
 alias screen='screen -x || screen -U'
 
 # Abbreviations
-alias ll='ls -lph --color=always --group-directories-first'
+if [ $BASHMAJOR -gt 3 ]; then
+    alias ll='ls -lph --color=always --group-directories-first'
+else
+    alias ll='ls -lph'
+fi
 alias lrt='ls -lrt'
 alias lsd='ls -ld */'
 alias l='ls -CF'
