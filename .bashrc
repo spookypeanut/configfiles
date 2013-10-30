@@ -141,7 +141,7 @@ gitk()  { git diff > /dev/null && /usr/bin/gitk --all $* & }
 
 # Tools
 alias np='cat >/dev/null'
-piechart() { du --max-depth=1 $* | sort -n; }
+piechart() { du -h --max-depth=1 $* | sort --human-numeric; }
 echopath() {
     if [ -z "$1" ]; then
         pathtouse=$PATH
