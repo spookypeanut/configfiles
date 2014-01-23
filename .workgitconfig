@@ -18,3 +18,5 @@
     enabled = 1
 [url "git:/scm/"]
     insteadOf = /net/git/
+[gui]
+	fontdiff = -family Courier -size 8 -weight normal -slant roman -underline 0 -overstrike 0
