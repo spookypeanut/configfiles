@@ -10,4 +10,7 @@ for i in .bashrc .vimrc .vim .inputrc .profile .screenrc todo.cfg .tmux.conf; do
     ln -s configfiles/$i .
 done
 
+mkdir -p ~/.ipython
+ln -s configfiles/ipythonrc .ipython/
+
 echo "Now copy across the .bashrc.fscfc if necessary"
