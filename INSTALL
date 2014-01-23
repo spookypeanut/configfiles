@@ -6,7 +6,7 @@ https_proxy=proxy.framestore.com:8001
 cd $HOME
 git clone https://github.com/spookypeanut/configfiles.git
 mkdir -p bin
-for i in .bashrc .vimrc .vim .inputrc .profile .screenrc todo.cfg; do
+for i in .bashrc .vimrc .vim .inputrc .profile .screenrc todo.cfg .tmux.conf; do
     ln -s configfiles/$i .
 done
 
