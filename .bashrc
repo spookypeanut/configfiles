@@ -22,6 +22,7 @@ if [ $AT_FRAMESTORE -eq 1 ]; then
     fi
 fi
 
+
 # ENVIRONMENT VARIABLES
 # I'd love to set this only in .profile, but thanks to /etc/bashrc.global I can't
 if [[ `uname` == "Linux" ]]; then
@@ -211,7 +212,7 @@ complete -F testcompletefunction testcomplete
 # HISTORY
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
-export HISTCONTROL=erasedups:ignorespace
+export HISTCONTROL=ignoredups:ignorespace
 # HISTIGNORE should *only* contain things that you never want to do
 # twice in a row
 export HISTIGNORE="clear:bg:fg:cd:exit"
