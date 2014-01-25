@@ -14,7 +14,7 @@ defmonitor on
 activity ''
 
 ## Example auto-starts.
-source .screenwindows
+#source .screenwindows
 
 ##############################################################################
 # BINDINGS

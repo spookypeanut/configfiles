@@ -8,7 +8,7 @@
     co = checkout
     current-branch = "!git symbolic-ref HEAD 2> /dev/null | sed -e 's#refs/heads/##'"
     graph = log --graph --all --oneline --decorate --pretty=\"format:%C(yellow)%h %Cblue%an %Cgreen%ar%C(yellow bold)%d%Creset%n%s\"
-    pull2 = "!git fetch origin && ( git pull --ff-only || git rebase -p origin/$(git current-branch))"
+    ;pull2 = "!git fetch origin && ( git pull --ff-only || git rebase -p origin/$(git current-branch))"
     st = status -s
     vim = difftool --tool=vimdiff
 [user]
@@ -18,3 +18,5 @@
     enabled = 1
 [url "git:/scm/"]
     insteadOf = /net/git/
+[gui]
+	fontdiff = -family Courier -size 8 -weight normal -slant roman -underline 0 -overstrike 0
