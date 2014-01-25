@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+for i in $@; do
+    git co $i
+    git pull
+    if [ "$OLD" != "" ]; then 
+        git merge $OLD
+    fi
+    OLD=$i
+done
