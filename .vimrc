@@ -15,6 +15,8 @@ set nofoldenable
 
 set showcmd  "Show the current partial command on the right of the command line
 set incsearch "Turn on incremental search (ie search as you type)
+nohlsearch "Do this so we don't have highlighting from previous searches come up when we start vim
+set hlsearch "Turn search term highlighting on by default
 set report=0 "Always tell me how many lines have changed when search / replacing
 set splitbelow "Make new split below the current one
 set background=dark "Want dark background please
