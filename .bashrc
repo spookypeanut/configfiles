@@ -45,6 +45,7 @@ alias grep='grep --color=auto -I'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias screen='screen -x || screen -U'
+alias tmux='tmux attach || tmux -u'
 
 # Abbreviations
 if [ $BASHMAJOR -gt 3 ]; then
