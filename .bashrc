@@ -47,6 +47,7 @@ alias egrep='egrep --color=auto'
 alias screen='screen -x || screen -U'
 alias mpq='mplayer -nosound'
 alias lsdvd='lsdvd | sed "/^$/d"'
+alias tmux='tmux attach || tmux -u'
 
 # Abbreviations
 if [ $BASHMAJOR -gt 3 ]; then
@@ -64,7 +65,7 @@ g() { grep -li $* *; }
 alias ipy="ipython"
 alias py="python"
 # Can't do this as a function, so here's a cheap hack
-echo 'rmdir "$*" 2> /dev/null && echo "Removed '$*'"; true;' > ~/bin/_rmdir_verbose_no_error
+echo 'rmdir "$@" 2> /dev/null && echo "Removed $*"; true;' > ~/bin/_rmdir_verbose_no_error
 chmod 755 ~/bin/_rmdir_verbose_no_error
 alias prunedirs='find -depth -type d -exec _rmdir_verbose_no_error {} \;'
 alias start='xdg-open'
