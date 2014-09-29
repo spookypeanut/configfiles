@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python -c "import grp; print('\n'.join(sorted(grp.getgrnam('$1').gr_mem)))"
