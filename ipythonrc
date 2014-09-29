@@ -342,8 +342,8 @@ object_info_string_level 0
 # can cancel the traceback with Ctrl-C (maybe hitting it more than once).
 
 #xmode Plain
-#xmode Context
-xmode Verbose
+xmode Context
+#xmode Verbose
 
 # multi_line_specials: if true, allow magics, aliases and shell escapes (via
 # !cmd) to be used in multi-line input (like for loops).  For example, if you
