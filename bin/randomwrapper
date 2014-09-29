@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+CHANCEOFFAIL=10
+if [ "$1" -eq "$1" ]; then
+    CHANCEOFFAIL=$1
+    echo "1 in $CHANCEOFFAIL chance"
+    shift
+fi
+COMMAND="$@"
+echo "Pretending to run '$COMMAND'..."
+
+RANDOMNUM=$(($RANDOM%$CHANCEOFFAIL))
+if [ $RANDOMNUM -eq 0 ]; then
+    echo "Command failed, setting exit value to 1"
+    exit 1
+else
+    echo "Command succeeded"
+fi
