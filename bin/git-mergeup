@@ -2,11 +2,16 @@
 
 set -e
 
+FIRST=$1
+
 for i in $@; do
     git co $i
     git pull
     if [ "$OLD" != "" ]; then 
         git merge $OLD
+        echo "Merged $OLD into $i successfully"
     fi
     OLD=$i
 done
+
+git co $FIRST
