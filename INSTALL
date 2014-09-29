@@ -18,3 +18,4 @@ mkdir -p ~/.ipython
 ln -s configfiles/ipythonrc .ipython/
 
 echo "Now copy across the .bashrc.fscfc if necessary"
+echo "And choose which .gitconfig to use"

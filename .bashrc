@@ -11,7 +11,7 @@ if [ $AT_FRAMESTORE -eq 1 ]; then
     ONSL6=0
     R="/etc/redhat-release"
     if [ -f $R ]; then
-        if [ "$(cat $R | head -c28)" == "Scientific Linux release 6.3" ]; then
+        if [ "$(cat $R | head -c26)" == "Scientific Linux release 6" ]; then
             ONSL6=1
         fi
     fi
