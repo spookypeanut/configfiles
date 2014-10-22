@@ -7,9 +7,6 @@
 [submodule ".vim/supertab"]
 	path = .vim/supertab
 	url = http://github.com/ervandew/supertab.git
-[submodule ".vim/twitvim"]
-	path = .vim/twitvim
-	url = http://github.com/developwithpassion/twitvim.git
 [submodule ".vim/taglist"]
 	path = .vim/taglist
 	url = http://github.com/learnjin/taglist.vim.git
