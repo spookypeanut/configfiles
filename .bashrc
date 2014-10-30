@@ -47,7 +47,7 @@ alias egrep='egrep --color=auto'
 alias screen='screen -x || screen -U'
 alias mpq='mplayer -nosound'
 alias lsdvd='lsdvd | sed "/^$/d"'
-alias tmux='tmux attach || tmux -u'
+alias tmux='tmux -2 attach || tmux -2 -u'
 
 # Abbreviations
 if [ $BASHMAJOR -gt 3 ]; then
