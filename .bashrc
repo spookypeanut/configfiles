@@ -69,6 +69,7 @@ echo 'rmdir "$@" 2> /dev/null && echo "Removed $*"; true;' > ~/bin/_rmdir_verbos
 chmod 755 ~/bin/_rmdir_verbose_no_error
 alias prunedirs='find -depth -type d -exec _rmdir_verbose_no_error {} \;'
 alias start='xdg-open'
+alias aptupgrade='sudo aptitude update && sudo aptitude upgrade'
 
 alias h='history | grep -i '
 alias p='ps -ef | grep -v grep | grep -i '
