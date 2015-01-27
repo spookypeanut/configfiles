@@ -1,1 +1,0 @@
-/net/homes/hbush/.vim/vimmaya/mayaoutput.vim

@@ -1,1 +1,0 @@
-../twitvim/plugin/twitvim.vim
