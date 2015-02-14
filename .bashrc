@@ -316,7 +316,7 @@ else
     alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
     alias scummvm='scummvm -d5'
 
-    export PATH=$PATH:$HOME/adt-bundle-linux-x86/sdk/platform-tools/:$HOME/adt-bundle-linux-x86/sdk/tools/
+    export PATH=$PATH:$HOME/android/sdks/platform-tools:$HOME/android/sdks/tools
     export ANDROID_LOG_TAGS="*:E WakeMe@:V"
 fi
 
