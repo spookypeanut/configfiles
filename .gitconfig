@@ -13,3 +13,5 @@
 [user]
     name = spookypeanut
     email = github@spookypeanut.co.uk
+[push]
+	default = simple
