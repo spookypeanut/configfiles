@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/hbush/bin'
+let g:netrw_dirhist_2='/home/hbush/bin/lib'
+let g:netrw_dirhist_3='/home/hbush/bin/lib/python'
