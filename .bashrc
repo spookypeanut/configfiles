@@ -168,6 +168,7 @@ findinpath() {
         fi
     done
 }
+alias battery='echo "scale=1; $(cat /sys/class/power_supply/BAT0/charge_now) / $(cat /sys/class/power_supply/BAT0/charge_full) * 100 "| bc'
 
 # Misspellings
 alias cd..='cd ..'
