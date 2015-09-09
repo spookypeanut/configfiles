@@ -39,67 +39,32 @@ def get_windows():
 
 def screnum():
     print "Reading window list ..."
-    windows = get_windows()
-
     # Remember original window number
     my_window_number = int(checked_call('tmux display-message -p "#I"'))
-
-    def swap(i, j):
-        """
-        Moves the given window number in the given session from window number i
-        to window number j, swapping it with the window currently at window
-        number j if necessary
-        """
-
-        if j in windows:
+    windows = get_windows()
+    sorted_wins = sorted(windows.keys())
+    for newnum, oldnum in enumerate(sorted_wins):
+        if oldnum == newnum:
+            continue
+        if newnum in windows:
             movement_cmd = "swap-window"
-            tmp = windows[i]
-            windows[i] = windows[j]
-            windows[j] = tmp
+            if my_window_number == oldnum:
+                my_window_number = newnum
+            tmp = windows[oldnum]
+            windows[oldnum] = windows[newnum]
+            windows[newnum] = tmp
 
-            print "Swapping windows %d and %d" % (i, j)
+            print "Swapping windows %d and %d" % (oldnum, newnum)
         else:
             movement_cmd = "move-window"
-            windows[j] = windows[i]
-            del windows[i]
+            if my_window_number == oldnum:
+                my_window_number = newnum
+            windows[newnum] = windows[oldnum]
+            del windows[oldnum]
 
-            print "Moving window %d to %d" % (i, j)
+            print "Moving window %d to %d" % (oldnum, newnum)
 
-        checked_call("tmux %s -d -s %d -t %d" % (movement_cmd, i, j))
-
-    def min_window(start_index):
-        """
-        Find the window in the subset of windows whose numbers are >=
-        start_index with the smallest name (sorted lexicographically)
-        """
-        min_window_number = None
-
-        for window_number in windows:
-            if (window_number >= start_index and
-                (min_window_number == None or
-                 windows[window_number] < windows[min_window_number])):
-                min_window_number = window_number
-
-        return min_window_number
-
-    # Perform insertion sort on the windows.
-    num_windows = len(windows)
-
-    for i in xrange(num_windows):
-        smallest_window_number = min_window(i)
-
-        if smallest_window_number == None:
-            break
-        elif smallest_window_number == i:
-            continue
-        else:
-            swap(smallest_window_number, i)
-
-            # If the window you moved is the one you're currently in, note it
-            if smallest_window_number == my_window_number:
-                my_window_number = i
-
-    # Move current window back to original window
+        checked_call("tmux %s -d -s %d -t %d" % (movement_cmd, oldnum, newnum))
     checked_call("tmux select-window -t :%d" % (my_window_number))
 
 if __name__ == "__main__":
