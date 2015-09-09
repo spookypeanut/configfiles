@@ -163,8 +163,8 @@ map \e :cn<CR>
 map \E :cp<CR>
 
 " Easier way to increase / decrease the size of splits
-map + 5<C-W>+
-map - 5<C-W>-
+map + 20<C-W>+
+map - 20<C-W>-
 map <C-+> <C-W>+
 map <C--> <C-W>-
 
