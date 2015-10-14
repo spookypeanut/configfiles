@@ -169,6 +169,7 @@ findinpath() {
     done
 }
 alias battery='echo "scale=1; $(cat /sys/class/power_supply/BAT0/charge_now) / $(cat /sys/class/power_supply/BAT0/charge_full) * 100 "| bc'
+alias temp='for i in /sys/class/thermal/thermal_zone?/temp; do echo $(cat $i | cut -c1-2).$(cat $i | cut -c3-3)°; done'
 
 # Misspellings
 alias cd..='cd ..'
@@ -313,7 +314,6 @@ else
     alias autostitch="wine $HOME/apps/autostitch/autostitch.exe"
     alias ida='VirtualBox --startvm ida'
 
-    alias temp='test -f /sys/devices/virtual/thermal/thermal_zone0/temp && cat /sys/devices/virtual/thermal/thermal_zone0/temp'
     alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
     alias scummvm='scummvm -d5'
 
