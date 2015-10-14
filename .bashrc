@@ -299,6 +299,7 @@ fi
 if [ -e $HOME/apps/todo.txt_cli/todo_completion -a \( $BASHMAJOR -gt 3 \) ]; then
     source $HOME/apps/todo.txt_cli/todo_completion
     alias t="todo.sh"
+    alias a="~/tor/tor-browser_en-US/Browser/firefox"
     export TODOTXT_DEFAULT_ACTION=ls
 fi
 
@@ -316,6 +317,7 @@ else
 
     alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
     alias scummvm='scummvm -d5'
+    alias tocomp='cd "$(echo $PWD | sed "s_/Books/_/BooksComp/_" | sed "s_/Comedy/_/ComedyComp/_")"'
     # Touchpad sensitivity in SDL (ScummVM) is ridiculous. These help
     export SDL_VIDEO_X11_DGAMOUSE=0
     export SDL_VIDEO_X11_MOUSEACCEL="1/1/1"
@@ -326,4 +328,3 @@ else
 fi
 
 [[ -f "/home/hbush/.config/autopackage/paths-bash" ]] && . "/home/hbush/.config/autopackage/paths-bash" || true
-
