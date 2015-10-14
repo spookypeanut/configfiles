@@ -316,6 +316,10 @@ else
 
     alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
     alias scummvm='scummvm -d5'
+    # Touchpad sensitivity in SDL (ScummVM) is ridiculous. These help
+    export SDL_VIDEO_X11_DGAMOUSE=0
+    export SDL_VIDEO_X11_MOUSEACCEL="1/1/1"
+    export SDL_MOUSE_RELATIVE=0
 
     export PATH=$PATH:$HOME/android/sdks/platform-tools:$HOME/android/sdks/tools
     export ANDROID_LOG_TAGS="*:E WakeMe@:V"
