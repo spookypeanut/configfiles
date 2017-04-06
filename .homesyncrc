@@ -1,0 +1,35 @@
+[video]
+source = /media/openshare/video
+destination = /mnt/george/video
+
+[photos]
+source = /media/openshare/Photos
+destination = /mnt/fred/Photos
+
+[documents]
+source = /media/openshare/documents
+destination = /mnt/fred/documents
+
+[mp3s]
+source = /media/openshare/mp3s
+destination = /mnt/fred/mp3s
+
+[helen]
+source = /media/openshare/helen
+destination = /mnt/fred/helen
+
+[games]
+source = /media/openshare/games
+destination = /mnt/fred/games
+
+[data]
+source = /media/openshare/data
+destination = /mnt/fred/data
+
+[archive]
+source = /media/openshare/archive
+destination = /mnt/george/archive
+
+[ebooks]
+source = /media/openshare/ebooks
+destination = /mnt/fred/ebooks
