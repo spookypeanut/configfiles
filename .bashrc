@@ -28,11 +28,13 @@ fi
 if [[ `uname` == "Linux" ]]; then
     PATH=$HOME/apps/bin:${PATH}
 fi
-export PATH=$HOME/bin:${PATH}
-#export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/apps/lib/
+export PATH=$HOME/bin:$HOME/rippingscripts:${PATH}
 export EDITOR="gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
 export MANPAGER="vimman"
+
+# Make DVD reading less verbose
+export DVDCSS_VERBOSE=1
 
 # Output a core please maya
 export MAYA_DEBUG_NO_SIGNAL_HANDLERS=1
@@ -107,8 +109,7 @@ cd() {
 }
 rd() {
     if [[ ! -z "$CDHIST" ]]
-    then
-        builtin cd "${CDHIST##*:}"
+    then builtin cd "${CDHIST##*:}"
         CDHIST="${CDHIST%:*}"  # Pop directory
     fi
 }
@@ -299,7 +300,7 @@ fi
 if [ -e $HOME/apps/todo.txt_cli/todo_completion -a \( $BASHMAJOR -gt 3 \) ]; then
     source $HOME/apps/todo.txt_cli/todo_completion
     alias t="todo.sh"
-    alias a="~/tor/tor-browser_en-US/Browser/firefox"
+    alias a="start-tor-browser"
     export TODOTXT_DEFAULT_ACTION=ls
 fi
 
@@ -324,7 +325,6 @@ else
     export SDL_MOUSE_RELATIVE=0
 
     export PATH=$PATH:$HOME/android/sdks/platform-tools:$HOME/android/sdks/tools
-    export ANDROID_LOG_TAGS="*:E WakeMe@:V"
 fi
 
 [[ -f "/home/hbush/.config/autopackage/paths-bash" ]] && . "/home/hbush/.config/autopackage/paths-bash" || true

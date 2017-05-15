@@ -1,5 +1,9 @@
+! Don't use this! Use /etc/default/keyboard
+!   XKBOPTIONS="caps:escape"
+! But make sure that in the keyboard settings, the layout is set to "use
+! system settings"
 ! Swap caps lock and escape
-remove Lock = Caps_Lock
-keysym Escape = Caps_Lock
-keysym Caps_Lock = Escape
-add Lock = Caps_Lock
+!remove Lock = Caps_Lock
+!keysym Escape = Caps_Lock
+!keysym Caps_Lock = Escape
+!add Lock = Caps_Lock
