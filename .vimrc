@@ -12,6 +12,7 @@ set backspace=eol,start
 
 set foldmethod=indent
 set nofoldenable
+set nojoinspaces
 
 set showcmd  "Show the current partial command on the right of the command line
 set incsearch "Turn on incremental search (ie search as you type)
@@ -45,10 +46,6 @@ map ; :
 noremap ;; ;
 "repeat the last command and put the cursor at start of change
 map . .`[
-"
-" Use "magic" regexps (ie, fewer backslashes) (trial)
-nnoremap / /\v
-vnoremap / /\v
 
 " In normal and visual modes, use tab to jump between brackets
 nnoremap <tab> %
@@ -67,7 +64,7 @@ colo peaksea
 
 " Show whitespace
 set list
-"set listchars=tab:▸-,eol:↵
+"set listchars=tab:â–¸-,eol:â†µ
 set listchars=tab:>-,eol:$
 hi SpecialKey cterm=NONE ctermfg=1 guifg=DarkRed
 hi NonText cterm=NONE ctermfg=1 guifg=DarkRed
@@ -141,13 +138,16 @@ map <F8> :%s/[[:space:]][[:space:]]*$//g
 " Explore the filesystem
 map <F9> :Sexplore<CR>
 " Toggle paste
-map <F10> :set paste!<Bar>set paste?<CR>
-imap <F10> <Esc>:set paste!<Bar>set paste?<CR>a
+set pastetoggle=<F10>
 " Toggle line numbers
 "map <F11> :se nu!<CR>
 map <F11> :Ant install<CR>
 " Maximize current split
 map <F12> <C-w><C-_>
+
+" Use Q for formatting the current paragraph (or selection)
+vmap Q gq
+nmap Q gqq
 
 " Easier way to jump between splits
 map <C-j> <C-w>j
@@ -193,13 +193,11 @@ nmap ,fpm :s/, *[a-z]*/ + ", " + /eg<CR>:s/([a-z]*/(" +/<CR>:s/)[^()]*$/ + ")\\n
 " Toggle word
 nmap ,t :ToggleWord<CR>
 
-" VCS Command
-nmap ,va :VCSAdd<CR>
-nmap ,vd :VCSDiff<CR>
-nmap ,vc :VCSCommit<CR>
-nmap ,vu :VCSUpdate<CR>
-nmap ,vp :exe 'cd ' . expand ("%:p:h")<CR>:!fSandboxPub %<CR>
-let VCSCommandGitDiffOpt="--no-ext-diff"
+nmap ]e :cnext<CR>
+nmap [e :cprevious<CR>
+nmap ]w :lnext<CR>
+nmap [w :lprevious<CR>
+
 
 " Pypar creates a pair of python :param lines
 command -nargs=1 Pypar :normal o:param <args>: <CR>:type <args>: <CR><C-[>kkA
@@ -241,18 +239,22 @@ endfunction
 
 autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
 
+fun! s:ToggleMouse()
+    if !exists("s:old_mouse")
+        let s:old_mouse = "a"
+    endif
+
+    if &mouse == ""
+        let &mouse = s:old_mouse
+        echo "Mouse is for Vim (" . &mouse . ")"
+    else
+        let s:old_mouse = &mouse
+        let &mouse=""
+        echo "Mouse is for terminal"
+    endif
+endfunction
+
 nmap ,gg :!git gui<CR>
-
-noremap ,gp :call Svndiff("prev")<CR> 
-noremap ,gn :call Svndiff("next")<CR> 
-noremap ,gc :call Svndiff("clear")<CR> 
-
-hi DiffAdd      ctermfg=0 ctermbg=2 guibg='green' 
-hi DiffDelete   ctermfg=0 ctermbg=1 guibg='red' 
-hi DiffChange   ctermfg=0 ctermbg=3 guibg='yellow' 
-
-" TwitVim
-let twitvim_enable_python = 1
 
 " Tag list
 let Tlist_Exit_OnlyWindow = 1
@@ -261,6 +263,7 @@ let Tlist_WinWidth = 50
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 let g:pyflakes_use_quickfix = 0
+let g:pymode_rope = 0
 
 " Not sure how many of these are needed...
 filetype plugin indent on
