@@ -52,11 +52,7 @@ alias lsdvd='lsdvd | sed "/^$/d"'
 alias tmux='tmux -2 attach || tmux -2 -u'
 
 # Abbreviations
-if [ $BASHMAJOR -gt 3 ]; then
-    alias ll='ls -lph --color=always --group-directories-first'
-else
-    alias ll='ls -lph'
-fi
+alias ll='ls -lph --color=always --group-directories-first'
 alias lrt='ls -lrt'
 alias lsd='ls -ld */'
 alias l='ls -CF'
@@ -78,8 +74,6 @@ alias p='ps -ef | grep -v grep | grep -i '
 
 alias vi='vim'
 alias vim='vim -o'
-
-alias nydate='TZ=America/New_York date'
 
 alias make='time make'
 alias ssh='ssh -Y'
