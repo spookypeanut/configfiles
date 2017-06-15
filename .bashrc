@@ -239,63 +239,13 @@ if [ -t 0 ]; then
     # don't attempt to search the PATH for completion of an empty line
     shopt -s no_empty_cmd_completion
     # if you try to run a directory, it cds to it instead
-    if [ $BASHMAJOR -gt 3 ]; then
-        shopt -s autocd
-    fi
+    shopt -s autocd
     export PS1='$_SHELL_TITLE\w$ '
     stty stop ^-    # I like ctrl-s, so set 'ctrl -' to stop the terminal instead
 fi
 labelshell() {
     export _SHELL_TITLE="$@ "
 }
-
-# Timing and error code printouts
-
-# Tie into the DEBUG event to get a zsh-like preexec hook
-# A more complete version at: http://glyf.livejournal.com/63106.html
-preexec() { :; }    # Default empty function
-postexec() { :; }   # Default empty function
-preexec_invoke_exec () {
-    [ -n "$COMP_LINE" ] && return  # Completing, do nothing
-    preexec "$(history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g")";
-}
-trap 'preexec_invoke_exec' DEBUG
-PROMPT_COMMAND='postexec'
-
-if [ -n "$STY" ]
-then
-    __host="$(hostname | sed 's/\..*//')"
-    __set_title() {
-        printf "\033k%s\033\\" "$1"
-        printf "\033]0;$__host:%s\007" "$1"
-    }
-    preexec() {
-        __set_title "($(substr "$1" 0 7)) $(substr "$(basename "$PWD/")" 0 5)"
-        [ -z $__cmd_time ] && __cmd_time="$(date '+%s')"
-    }
-    postexec() {
-        local exitcode=$?
-
-        # Set title to directory or $TITLE
-        [ -z "$TITLE" ] && __set_title "$(substr "$PWD/" -10)" || \
-            __set_title "$TITLE"
-
-        # Report the time the command took if greater than a threshold
-        local t=$[ $(date '+%s') - __cmd_time ]
-        if [ $t -gt 3 -o $exitcode -ne 0 ]
-        then
-            if [ $exitcode -ne 0 ]
-            then
-                echo -en " [Finished in $t seconds "
-                echo -e  "at $(date '+%H:%M:%S') with code $exitcode]\033[0m"
-            else
-                echo -en " [Finished in $t seconds "
-                echo -e  "at $(date '+%H:%M:%S')]\033[0m"
-            fi
-        fi
-        __cmd_time=
-    }
-fi
 
 if [ -e $HOME/apps/todo.txt_cli/todo_completion -a \( $BASHMAJOR -gt 3 \) ]; then
     source $HOME/apps/todo.txt_cli/todo_completion
@@ -326,5 +276,3 @@ else
 
     export PATH=$PATH:$HOME/android/sdks/platform-tools:$HOME/android/sdks/tools
 fi
-
-[[ -f "/home/hbush/.config/autopackage/paths-bash" ]] && . "/home/hbush/.config/autopackage/paths-bash" || true
