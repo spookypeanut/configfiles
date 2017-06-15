@@ -95,43 +95,6 @@ alias .6='cd ../../../../../..'
 alias .7='cd ../../../../../../..'
 alias .8='cd ../../../../../../../..'
 alias .9='cd ../../../../../../../../..'
-# Directory management
-cd() {
-    CDHIST="$CDHIST:$PWD"  # Push directory
-    if [[ "$1" == "-" ]]
-    then rd
-    else
-        if [[ -z "$1" || -d "$1" ]]
-        then builtin cd "$@"
-        else builtin cd "$(dirname "$1")"
-        fi
-    fi
-}
-rd() {
-    if [[ ! -z "$CDHIST" ]]
-    then builtin cd "${CDHIST##*:}"
-        CDHIST="${CDHIST%:*}"  # Pop directory
-    fi
-}
-cdhist() {
-    echo "$CDHIST" | tr ':' '\n'
-}
-
-substr() { # $1 string, $2 start, $3 end
-    local start=$2
-    local end=$3
-    [[ -z $start ]] && start=0
-    [[ $start -lt 0 ]] && start=$[${#1} + $start]
-    [[ $start -lt 0 ]] && start=0
-    [[ -z $end ]] && end=${#1}
-    [[ $end -lt 0 ]] && end=$[${#1} + $end]
-    [[ $end -lt 0 ]] && end=0
-    len=$[$end - $start]
-    if [[ $len -gt 0 ]]
-    then
-        echo ${1:$start:$len}
-    fi
-}
 
 lf()    { ls -d $PWD/$1*; }
 cw()    { cat $(which $*); }
