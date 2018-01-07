@@ -74,7 +74,7 @@ nmap <leader>l :set list!<CR>
 
 " Jump to the last known position in the file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-hi CursorLine cterm=NONE ctermbg=235 guibg=#333
+hi CursorLine cterm=NONE ctermbg=235 guibg=Gray
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
@@ -82,7 +82,7 @@ set ruler
 if exists('+colorcolumn')
     " 7.3 only
     set colorcolumn=73,74,75,76,77,78,79
-    hi ColorColumn ctermbg=235 guibg=#333
+    hi ColorColumn ctermbg=235 guibg=Gray
 else
     " You can turn this off with :call matchdelete(w:m2)
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
