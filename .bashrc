@@ -56,6 +56,8 @@ alias vim='vim -o'
 alias vi='vim'
 alias ssh='ssh -Y'
 
+alias mount='mount | column -t'
+
 # Abbreviations
 alias ll='ls -lph --color=always --group-directories-first'
 alias lrt='ls -lrt'
