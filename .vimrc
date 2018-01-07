@@ -264,6 +264,7 @@ let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 let g:pyflakes_use_quickfix = 0
 let g:pymode_rope = 0
+let g:pymode_python = 'python3'
 
 " Not sure how many of these are needed...
 filetype plugin indent on
