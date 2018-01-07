@@ -52,6 +52,9 @@ alias screen='screen -x || screen -U'
 alias mpq='mplayer -nosound'
 alias lsdvd='lsdvd | sed "/^$/d"'
 alias tmux='tmux -2 attach || tmux -2 -u'
+alias vim='vim -o'
+alias vi='vim'
+alias ssh='ssh -Y'
 
 # Abbreviations
 alias ll='ls -lph --color=always --group-directories-first'
@@ -74,11 +77,7 @@ alias aptupgrade='sudo aptitude update && sudo aptitude upgrade'
 alias h='history | grep -i '
 alias p='ps -ef | grep -v grep | grep -i '
 
-alias vi='vim'
-alias vim='vim -o'
-
 alias make='time make'
-alias ssh='ssh -Y'
 
 alias v.b='vim ~/.bashrc*'
 alias v.v='vim ~/.vimrc'
