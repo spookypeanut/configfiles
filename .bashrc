@@ -39,6 +39,8 @@ export DVDCSS_VERBOSE=1
 # Output a core please maya
 export MAYA_DEBUG_NO_SIGNAL_HANDLERS=1
 
+export PYTHONDONTWRITEBYTECODE=1
+
 # ALIASES & FUNCTIONS
 # Default settings
 alias bc='bc -l'
