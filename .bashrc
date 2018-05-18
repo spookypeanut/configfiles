@@ -30,7 +30,7 @@ if [[ `uname` == "Linux" ]]; then
 fi
 export PATH=$HOME/bin:$HOME/rippingscripts:${PATH}
 export EDITOR="gvim --nofork"
-export PYTHONPATH="$HOME/lib/python/:$PYTHONPATH"
+export PYTHONPATH="$HOME/lib/python/:$HOME/rippingscripts/python/:$PYTHONPATH"
 export MANPAGER="vimman"
 
 # Make DVD reading less verbose
