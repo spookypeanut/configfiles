@@ -50,7 +50,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias screen='screen -x || screen -U'
 alias mpq='mplayer -nosound'
-alias lsdvd='lsdvd | sed "/^$/d"'
+lsdvd() { /usr/bin/lsdvd "$@" | sed "/^$/d" ; }
 alias tmux='tmux -2 attach || tmux -2 -u'
 alias vim='vim -o'
 alias vi='vim'
