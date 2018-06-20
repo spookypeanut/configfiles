@@ -18,4 +18,4 @@
 [gui]
 [gui]
 	fontdiff = -family ProggySquareTT -size 11 -weight normal -slant roman -underline 0 -overstrike 0
-	fontui = -family \"DejaVu Sans Mono\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+	fontui = -family \"DejaVu Sans Mono\" -size 8 -weight normal -slant roman -underline 0 -overstrike 0
