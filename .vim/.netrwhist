@@ -1,3 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/home/hbush/Photos/.dtrash/info'
+let g:netrw_dirhist_2='/home/hbush/git/edgydata/edgydata/backend'
+let g:netrw_dirhist_3='/home/hbush/git/edgydata/edgydata'
+let g:netrw_dirhist_4='/home/hbush/Downloads/takeout/music/Takeout/Google Play Music/Playlists/Comp_ Mike'
+let g:netrw_dirhist_5='/home/hbush/Downloads/takeout/music/Takeout/Google Play Music/Playlists/Comp_ Mike/Tracks'
