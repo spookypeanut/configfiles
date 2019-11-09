@@ -78,27 +78,27 @@ set -g visual-activity off
 set -g terminal-overrides "xterm*:XT:colors=256"
 
 # Set command prompt/message bar colours
-set-window-option -g message-style bg=colour234
-set-window-option -g message-style fg=colour12
+set-window-option -g message-bg colour234
+set-window-option -g message-fg colour12
 
 # Set tab bar text
 set-option -g status-left-length 0
 set-option -g status-left ""
 
-set-option -g status-right-style bg=colour239
-set-option -g status-right-style fg=colour7
+set-option -g status-right-bg colour239
+set-option -g status-right-fg colour7
 set-option -g status-right-length 50
 set-option -g status-right " #h %H:%M "
 
 # Highlight current window tab
-set-window-option -g status-style bg="colour239"
+set-window-option -g status-bg "colour239"
 set-window-option -g window-status-format "#[fg=colour253] #I: #[fg=colour250]#W "
-set-window-option -g window-status-current-style bg=colour233
+set-window-option -g window-status-current-bg colour233
 set-window-option -g window-status-current-format "#[fg=colour7] #I: #[fg=colour7]#W "
 
-set -g pane-border-style fg=colour20
-set -g pane-active-border-style fg=colour33
-set -g pane-active-border-style bg=default
+set -g pane-border-fg colour20
+set -g pane-active-border-fg colour33
+set -g pane-active-border-bg default
 
 bind-key m set-option -g mode-mouse on
 bind-key M set-option -g mode-mouse off
