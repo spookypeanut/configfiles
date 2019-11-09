@@ -66,6 +66,7 @@ alias l='ls -CF'
 alias lcc='ls -l| grep -v "\.o$" | grep -v "\.a$"'
 alias lnc='ls -l --color=never'
 alias happyrsync='rsync --progress --stats --size-only -vv -r -t'
+alias slowrsync='rsync --progress --stats -vv -r -t --bwlimit=0.5M'
 g() { grep -li $* *; }
 alias ipy="ipython"
 alias py="python"
