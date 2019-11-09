@@ -15,16 +15,22 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
+"Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'nvie/vim-flake8'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" YouCompleteMe options
+let g:ycm_log_level='debug'
 let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_goto_buffer_command = 'split-or-existing-window'
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let python_highlight_all=1
 
 set encoding=utf-8
@@ -65,7 +71,7 @@ set history=500
 " Set swp file dir. The two slashes at the end mean that it puts the whole
 " path into the filename, letting you have /tmp/blah.txt and ~/blah.txt open
 " simultaneously
-set directory=~/.vim/tmp//    
+set directory=~/.vim/tmp//
 set backupdir=~/.vim/tmp    " Set backup dir.
 
 " Source the .vimrc immediately after you save it.
@@ -128,9 +134,11 @@ set guioptions-=m
 set gfn=Monospace\ 9
 
 
-" Persistant undo between sessions (7.3 only)
-set undofile
-set undodir=/tmp/undos
+if exists('+undofile')
+    " Persistant undo between sessions (7.3 only)
+    set undofile
+    set undodir=/tmp/undos
+endif
 
 " Select the text you just pasted
 nnoremap <leader>v V`]
@@ -149,11 +157,7 @@ map <F2> \c
 map <F3> /.{81,}<CR>
 " Open the "tag list" (function definition list, etc) and 
 " the project tree (eclim)
-map <F4> :TagbarToggle<CR>:ProjectTree<CR>
-" Commented out: let's not have it since the close doesn't work
-"autocmd VimEnter * nested TagbarOpen
-" But some things don't want it
-"au FileType man TagbarClose
+map <F4> :TagbarToggle<CR>
 
 " Toggle highlighting of search terms
 map <F5> :set hls!<bar>set hls?<CR>
@@ -188,8 +192,8 @@ map <C-h> <C-w>h
 map <C-s> <C-a>
 
 " Easier way to jump between errors
-map \e :cn<CR>
-map \E :cp<CR>
+map \e :lnext<CR>
+map \E :lprev<CR>
 
 " Easier way to increase / decrease the size of splits
 map + 20<C-W>+
@@ -229,9 +233,9 @@ nmap [w :lprevious<CR>
 
 
 " Pypar creates a pair of python :param lines
-command -nargs=1 Pypar :normal o:param <args>: <CR>:type <args>: <CR><C-[>kkA
+"command -nargs=1 Pypar :normal o:param <args>: <CR>:type <args>: <CR><C-[>kkA
 " Pyret creates return lines
-command Pyret :normal o:return: <CR>:rtype: <CR><C-[>kkA
+"command Pyret :normal o:return: <CR>:rtype: <CR><C-[>kkA
     
 
 " From http://stackoverflow.com/questions/4027222/vim-use-shorter-textwidth-in-comments-and-docstrings
@@ -267,6 +271,8 @@ function! GetPythonTextWidth()
 endfunction
 
 autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
+autocmd BufWritePre * :if &ft == 'python' | 
+autocmd FileType python autocmd BufWritePre <buffer> %s/\s\+$//e
 
 fun! s:ToggleMouse()
     if !exists("s:old_mouse")
@@ -292,8 +298,6 @@ let Tlist_WinWidth = 50
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 let g:pyflakes_use_quickfix = 0
-let g:pymode_rope = 0
-let g:pymode_python = 'python3'
 
 " Not sure how many of these are needed...
 filetype plugin indent on
