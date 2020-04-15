@@ -28,7 +28,7 @@ fi
 if [[ `uname` == "Linux" ]]; then
     PATH=$HOME/apps/bin:${PATH}
 fi
-export PATH=$HOME/bin:$HOME/rippingscripts:${PATH}
+export PATH=$HOME/bin:$HOME/rippingscripts:$HOME/grooviedev/bin:${PATH}
 export EDITOR="gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$HOME/rippingscripts/python/:$PYTHONPATH"
 export MANPAGER="vimman"
@@ -225,7 +225,6 @@ else
 
     # Wine / VM
     alias autostitch="wine $HOME/apps/autostitch/autostitch.exe"
-    alias ida='VirtualBox --startvm ida'
 
     alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
     alias scummvm='scummvm -d5'
