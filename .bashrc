@@ -31,7 +31,6 @@ fi
 export PATH=$HOME/bin:$HOME/rippingscripts:$HOME/grooviedev/bin:${PATH}
 export EDITOR="gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$HOME/rippingscripts/python/:$PYTHONPATH"
-export MANPAGER="vimman"
 
 # Make DVD reading less verbose
 export DVDCSS_VERBOSE=1
@@ -131,7 +130,8 @@ findinpath() {
     done
 }
 alias battery='echo "scale=1; $(cat /sys/class/power_supply/BAT0/charge_now) / $(cat /sys/class/power_supply/BAT0/charge_full) * 100 "| bc'
-alias temp='for i in /sys/class/thermal/thermal_zone?/temp; do echo $(cat $i | cut -c1-2).$(cat $i | cut -c3-3)°; done'
+alias temp='for i in /sys/devices/virtual/thermal/thermal_zone?; do echo $(cat $i/type): $(cat $i/temp | sed "s@\(..\)\(.\).*@\1.\2@")°; done'
+alias fans='for i in /sys/devices/virtual/thermal/cooling_device?; do echo $(cat $i/type): $(cat $i/cur_state)/$(cat $i/max_state); done'
 
 # Misspellings
 alias cd..='cd ..'

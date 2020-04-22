@@ -10,10 +10,6 @@ for i in .bashrc .vimrc .vim .inputrc .profile .screenrc todo.cfg .tmux.conf .Xm
     ln -s configfiles/$i .
 done
 
-for i in vimman; do
-    ln -s configfiles/$i ./bin/
-done
-
 mkdir -p ~/.ipython
 ln -s configfiles/ipythonrc .ipython/
 

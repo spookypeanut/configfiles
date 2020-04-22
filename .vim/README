@@ -1,0 +1,4 @@
+To get going:
+* Open vim
+* :VundleInstall
+* sudo apt install flake8
