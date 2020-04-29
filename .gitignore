@@ -4,3 +4,4 @@ eclim*
 bin/_*
 
 jobscheme*
+.vim/bundle
