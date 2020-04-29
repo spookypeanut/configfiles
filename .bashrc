@@ -1,27 +1,5 @@
-if [ -e /job/fscfc/ ]; then
-    AT_FRAMESTORE=1
-else
-    AT_FRAMESTORE=0
-fi
 
 BASHMAJOR=$(bash --version | head -n1 | sed 's/[^0-9]*\([0-9]*\).*/\1/')
-
-# Check if we're running SL6
-if [ $AT_FRAMESTORE -eq 1 ]; then
-    ONSL6=0
-    R="/etc/redhat-release"
-    if [ -f $R ]; then
-        if [ "$(cat $R | head -c26)" == "Scientific Linux release 6" ]; then
-            ONSL6=1
-        fi
-    fi
-    if [ $ONSL6 == 1 ]; then
-        source /etc/bashrc
-    elif [ -e /job/fscfc/common/bin/go-bash-setup ]; then
-        source go-bash-setup
-    fi
-fi
-
 
 # ENVIRONMENT VARIABLES
 # I'd love to set this only in .profile, but thanks to /etc/bashrc.global I can't
@@ -35,9 +13,6 @@ export PYTHONPATH="$HOME/lib/python/:$HOME/rippingscripts/python/:$PYTHONPATH"
 # Make DVD reading less verbose
 export DVDCSS_VERBOSE=1
 
-# Output a core please maya
-export MAYA_DEBUG_NO_SIGNAL_HANDLERS=1
-
 export PYTHONDONTWRITEBYTECODE=1
 
 # ALIASES & FUNCTIONS
@@ -48,8 +23,7 @@ alias grep='grep --color=auto -I'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias screen='screen -x || screen -U'
-alias mpq='mplayer -nosound'
-lsdvd() { /usr/bin/lsdvd "$@" | sed "/^$/d" ; }
+#lsdvd() { /usr/bin/lsdvd "$@" | sed "/^$/d" ; }
 alias tmux='tmux -2 attach || tmux -2 -u'
 alias vim='vim -o'
 alias vi='vim'
@@ -67,8 +41,10 @@ alias lnc='ls -l --color=never'
 alias happyrsync='rsync --progress --stats --size-only -vv -r -t'
 alias slowrsync='rsync --progress --stats -vv -r -t --bwlimit=0.5M'
 g() { grep -li $* *; }
-alias ipy="ipython"
+alias ipy="ipython3"
 alias py="python"
+alias py2="python2"
+alias py3="python3"
 # Can't do this as a function, so here's a cheap hack
 echo 'rmdir "$@" 2> /dev/null && echo "Removed $*"; true;' > ~/bin/_rmdir_verbose_no_error
 chmod 755 ~/bin/_rmdir_verbose_no_error
@@ -129,7 +105,7 @@ findinpath() {
         fi
     done
 }
-alias battery='echo "scale=1; $(cat /sys/class/power_supply/BAT0/charge_now) / $(cat /sys/class/power_supply/BAT0/charge_full) * 100 "| bc'
+alias battery='echo "scale=1; 100 * $(cat /sys/class/power_supply/BAT0/charge_now) / $(cat /sys/class/power_supply/BAT0/charge_full)"| bc'
 alias temp='for i in /sys/devices/virtual/thermal/thermal_zone?; do echo $(cat $i/type): $(cat $i/temp | sed "s@\(..\)\(.\).*@\1.\2@")°; done'
 alias fans='for i in /sys/devices/virtual/thermal/cooling_device?; do echo $(cat $i/type): $(cat $i/cur_state)/$(cat $i/max_state); done'
 
@@ -203,36 +179,21 @@ if [ -t 0 ]; then
     shopt -s autocd
     export PS1='$_SHELL_TITLE\w$ '
     stty stop ^-    # I like ctrl-s, so set 'ctrl -' to stop the terminal instead
+    tput cup "$LINES"
 fi
 labelshell() {
     export _SHELL_TITLE="$@ "
 }
 
-if [ -e $HOME/apps/todo.txt_cli/todo_completion -a \( $BASHMAJOR -gt 3 \) ]; then
-    source $HOME/apps/todo.txt_cli/todo_completion
-    alias t="todo.sh"
-    alias a="start-tor-browser"
-    export TODOTXT_DEFAULT_ACTION=ls
-fi
+# Wine / VM
+alias autostitch="wine $HOME/apps/autostitch/autostitch.exe"
 
-# Test if we're in framestore
-if [ $AT_FRAMESTORE -eq 1 ]; then
-    alias time='/usr/bin/time -p'
+alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
+alias scummvm='scummvm -d5'
+alias tocomp='cd "$(echo $PWD | sed "s_/Books/_/BooksComp/_" | sed "s_/Comedy/_/ComedyComp/_")"'
+# Touchpad sensitivity in SDL (ScummVM) is ridiculous. These help
+export SDL_VIDEO_X11_DGAMOUSE=0
+export SDL_VIDEO_X11_MOUSEACCEL="1/1/1"
+export SDL_MOUSE_RELATIVE=0
 
-    # Anything that shouldn't be published to the web goes in this file
-    source ~/.bashrc.fscfc
-else
-
-    # Wine / VM
-    alias autostitch="wine $HOME/apps/autostitch/autostitch.exe"
-
-    alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
-    alias scummvm='scummvm -d5'
-    alias tocomp='cd "$(echo $PWD | sed "s_/Books/_/BooksComp/_" | sed "s_/Comedy/_/ComedyComp/_")"'
-    # Touchpad sensitivity in SDL (ScummVM) is ridiculous. These help
-    export SDL_VIDEO_X11_DGAMOUSE=0
-    export SDL_VIDEO_X11_MOUSEACCEL="1/1/1"
-    export SDL_MOUSE_RELATIVE=0
-
-    export PATH=$PATH:$HOME/android/sdks/platform-tools:$HOME/android/sdks/tools
-fi
+export PATH=$PATH:$HOME/android/sdks/platform-tools:$HOME/android/sdks/tools
