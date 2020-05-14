@@ -1,12 +1,9 @@
 #!/bin/bash
 
-http_proxy=proxy.framestore.com:8001
-https_proxy=proxy.framestore.com:8001
-
 cd $HOME
 git clone https://github.com/spookypeanut/configfiles.git
 mkdir -p bin
-for i in .bashrc .vimrc .vim .inputrc .profile .screenrc todo.cfg .tmux.conf .Xmodmap; do
+for i in .bashrc .ripit .vimrc .vim .inputrc .profile .screenrc todo.cfg .tmux.conf .Xmodmap; do
     ln -s configfiles/$i .
 done
 
