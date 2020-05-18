@@ -7,6 +7,9 @@ for i in .bashrc .ripit .vimrc .vim .inputrc .profile .screenrc todo.cfg .tmux.c
     ln -s configfiles/$i .
 done
 
+for i in whipper; do
+    ln -s configfiles/$i .config/
+
 mkdir -p ~/.ipython
 ln -s configfiles/ipythonrc .ipython/
 
