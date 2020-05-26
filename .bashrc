@@ -191,9 +191,16 @@ alias autostitch="wine $HOME/apps/autostitch/autostitch.exe"
 alias adb-link='sudo `which adb` kill-server && sudo `which adb` start-server'
 alias scummvm='scummvm -d5'
 alias tocomp='cd "$(echo $PWD | sed "s_/Books/_/BooksComp/_" | sed "s_/Comedy/_/ComedyComp/_")"'
+alias whipper="docker run -ti --rm --device=/dev/cdrom --mount type=bind,source=/home/hbush/.config/whipper,target=/home/worker/.config/whipper --mount type=bind,source=/home/hbush/tmp/music,target=/output whipperteam/whipper"
 # Touchpad sensitivity in SDL (ScummVM) is ridiculous. These help
 export SDL_VIDEO_X11_DGAMOUSE=0
 export SDL_VIDEO_X11_MOUSEACCEL="1/1/1"
 export SDL_MOUSE_RELATIVE=0
 
 export PATH=$PATH:$HOME/android/sdks/platform-tools:$HOME/android/sdks/tools
+
+PATH="/home/hbush/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/hbush/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/hbush/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/hbush/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/hbush/perl5"; export PERL_MM_OPT;
