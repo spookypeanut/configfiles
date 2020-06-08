@@ -4,14 +4,15 @@ cd $HOME
 git clone https://github.com/spookypeanut/configfiles.git
 mkdir -p bin
 for i in .bashrc .ripit .vimrc .vim .inputrc .profile .screenrc todo.cfg .tmux.conf .Xmodmap; do
-    ln -s configfiles/$i .
+    ln -sv $HOME/configfiles/$i .
 done
 
 for i in whipper MusicBrainz; do
-    ln -s configfiles/$i .config/
+    ln -sv $HOME/configfiles/$i .config/
+done
 
 mkdir -p ~/.ipython
-ln -s configfiles/ipythonrc .ipython/
+ln -sv $HOME/configfiles/ipythonrc .ipython/
 
 echo "Now copy across the .bashrc.fscfc if necessary"
 echo "And choose which .gitconfig to use"
