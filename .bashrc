@@ -116,6 +116,8 @@ alias ls#='ls'
 alias grerp='grep'
 alias mv='mv -i'
 alias cp='cp -i'
+alias fs='ssh sys1342'
+alias rgs='~/framestorevpn/rgreceiver.sh'
 
 # COMPLETIONS
 if [ -f /etc/bash_completion ]; then
@@ -184,6 +186,8 @@ fi
 labelshell() {
     export _SHELL_TITLE="$@ "
 }
+
+alias flacinfo="metaflac --list --except-block-type PICTURE"
 
 # Wine / VM
 alias autostitch="wine $HOME/apps/autostitch/autostitch.exe"
