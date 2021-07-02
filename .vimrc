@@ -15,7 +15,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Valloric/YouCompleteMe'
-"Plugin 'vim-syntastic/syntastic'
 Plugin 'w0rp/ale'
 Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdcommenter'
@@ -110,8 +109,12 @@ nmap <leader>l :set list!<CR>
 " Jump to the last known position in the file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 hi CursorLine cterm=NONE ctermbg=235 guibg=Gray
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
+hi CursorColumn cterm=NONE ctermbg=235
+" Only have it set for the window we're currently in
+autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+autocmd VimLeave,WinLeave,BufWinLeave * setlocal nocursorline
+autocmd VimLeave,WinLeave,BufWinLeave * setlocal nocursorcolumn
 
 set ruler
 if exists('+colorcolumn')
@@ -152,10 +155,10 @@ if exists("+relativenumber")
     set relativenumber
 endif
 " Comment out a single line / range
-map <F2> \c 
+map <F2> \c
 " Search for any line longer than 80 characters
 map <F3> /.{81,}<CR>
-" Open the "tag list" (function definition list, etc) and 
+" Open the "tag list" (function definition list, etc) and
 " the project tree (eclim)
 map <F4> :TagbarToggle<CR>
 
@@ -236,7 +239,7 @@ nmap [w :lprevious<CR>
 "command -nargs=1 Pypar :normal o:param <args>: <CR>:type <args>: <CR><C-[>kkA
 " Pyret creates return lines
 "command Pyret :normal o:return: <CR>:rtype: <CR><C-[>kkA
-    
+
 
 " From http://stackoverflow.com/questions/4027222/vim-use-shorter-textwidth-in-comments-and-docstrings
 function! GetPythonTextWidth()
@@ -271,7 +274,7 @@ function! GetPythonTextWidth()
 endfunction
 
 autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
-autocmd BufWritePre * :if &ft == 'python' | 
+autocmd BufWritePre * :if &ft == 'python' |
 autocmd FileType python autocmd BufWritePre <buffer> %s/\s\+$//e
 
 fun! s:ToggleMouse()

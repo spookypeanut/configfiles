@@ -6,12 +6,12 @@ BASHMAJOR=$(bash --version | head -n1 | sed 's/[^0-9]*\([0-9]*\).*/\1/')
 if [[ `uname` == "Linux" ]]; then
     PATH=$HOME/apps/bin:${PATH}
 fi
-export PATH=$HOME/bin:$HOME/rippingscripts:$HOME/grooviedev/bin:${PATH}
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/rippingscripts:$HOME/grooviedev/bin:${PATH}
 export EDITOR="gvim --nofork"
 export PYTHONPATH="$HOME/lib/python/:$HOME/rippingscripts/python/:$PYTHONPATH"
 
 # Make DVD reading less verbose
-export DVDCSS_VERBOSE=1
+export DVDCSS_VERBOSE=0
 
 export PYTHONDONTWRITEBYTECODE=1
 
