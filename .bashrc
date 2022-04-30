@@ -75,7 +75,6 @@ fw()    { file $(which $*); }
 lw()    { ls -l $(which $*); }
 vw()    { vim $(which $*); }
 pywhich() { python -c "import $1; print $1.__file__"; }
-mkdir() { /bin/mkdir "$@" && if [[ "$#" -eq 1 ]]; then cd "$1"; fi; }
 
 # Git
 alias gg='git gui &'
@@ -186,6 +185,7 @@ fi
 labelshell() {
     export _SHELL_TITLE="$@ "
 }
+alias mtr="mtr --displaymode=1"
 
 alias flacinfo="metaflac --list --except-block-type PICTURE"
 

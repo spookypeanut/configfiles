@@ -7,9 +7,6 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tmhedberg/SimpylFold'
@@ -108,8 +105,8 @@ nmap <leader>l :set list!<CR>
 
 " Jump to the last known position in the file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-hi CursorLine cterm=NONE ctermbg=235 guibg=Gray
-hi CursorColumn cterm=NONE ctermbg=235
+hi CursorLine cterm=NONE ctermbg=235 guibg=Gray20
+hi CursorColumn cterm=NONE ctermbg=235 guibg=Gray20
 " Only have it set for the window we're currently in
 autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
 autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
@@ -120,7 +117,7 @@ set ruler
 if exists('+colorcolumn')
     " 7.3 only
     set colorcolumn=73,74,75,76,77,78,79
-    hi ColorColumn ctermbg=235 guibg=Gray
+    hi ColorColumn ctermbg=235 guibg=Gray20
 else
     " You can turn this off with :call matchdelete(w:m2)
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)

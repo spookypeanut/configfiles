@@ -3,7 +3,7 @@
 cd $HOME
 git clone https://github.com/spookypeanut/configfiles.git
 mkdir -p bin
-for i in .bashrc .ripit .vimrc .vim .inputrc .profile .screenrc todo.cfg .tmux.conf .Xmodmap; do
+for i in .bashrc .ripit .vimrc .vim .inputrc .profile .screenrc todo.cfg .tmux.conf .Xmodmap .fonts.conf .xsessionrc; do
     ln -sv $HOME/configfiles/$i .
 done
 

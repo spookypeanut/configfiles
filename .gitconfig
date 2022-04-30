@@ -17,5 +17,5 @@
 	default = simple
 [gui]
 [gui]
-	fontdiff = -family ProggySquareTT -size 14 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Terminus (TTF)\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
 	fontui = -family \"DejaVu Sans Mono\" -size 8 -weight normal -slant roman -underline 0 -overstrike 0
