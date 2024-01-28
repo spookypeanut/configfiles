@@ -5,3 +5,4 @@
 /home/hbush/mp3s/Comedy		/home/hbush/mp3s/ComedyComp		/home/hbush/bin/mp3tospeech.py		mp3		mp3
 /home/hbush/mp3s/BooksFlac	/home/hbush/mp3s/BooksComp		/home/hbush/bin/flac_to_speech.sh		flac		ogg
 /home/hbush/mp3s/Books		/home/hbush/mp3s/BooksComp		/home/hbush/bin/mp3tospeech.py		mp3		mp3
+/home/hbush/mp3s/Books		/home/hbush/mp3s/BooksComp		/home/hbush/bin/m4btospeech.py		m4b		opus
